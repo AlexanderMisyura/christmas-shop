@@ -1,0 +1,26 @@
+@use '../abstract/abstract_global';
+
+.best-gifts {
+  &__wrapper {
+    background-image: url(./assets/img/bg-snow.png);
+    background-color: #ff4646;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+  }
+
+  &__container {
+    flex-direction: column;
+    gap: abstract_global.rem(20px);
+    align-items: center;
+    text-align: center;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: abstract_global.rem(12px);
+    color: abstract_global.$clr-static-white;
+  }
+}

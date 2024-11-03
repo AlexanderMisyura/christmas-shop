@@ -1,0 +1,41 @@
+@use '../abstract/abstract_global';
+
+.gifts {
+  &__wrapper {
+    background-image: url(./assets/img/bg-garland.png);
+    background-color: abstract_global.$clr-primary;
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
+    border-radius: abstract_global.$border-rad-s;
+  }
+
+  &__container {
+    flex-direction: column;
+    gap: abstract_global.rem(20px);
+    align-items: center;
+    text-align: center;
+  }
+
+  &__header {
+    color: abstract_global.$clr-static-white;
+  }
+
+  &__tabs {
+    color: abstract_global.$clr-static-white;
+    display: flex;
+    gap: abstract_global.rem(8px);
+  }
+
+  &__tab {
+    &.gifts__tab_active {
+      cursor: default;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.nav__link_active) {
+        background-color: abstract_global.$clr-static-white-20;
+      }
+    }
+  }
+}
