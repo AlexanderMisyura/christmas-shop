@@ -1,0 +1,7 @@
+@use '../abstract/const';
+
+.main-container {
+  display: flex;
+  max-width: const.$desktop-max-container-width;
+  margin: auto;
+}

@@ -1,0 +1,8 @@
+@use '../abstract/abstract_global';
+
+.wrapper {
+  display: block;
+  max-width: abstract_global.$desktop-max-width;
+  margin: auto;
+  padding: abstract_global.rem(60px) abstract_global.rem(8px);
+}
