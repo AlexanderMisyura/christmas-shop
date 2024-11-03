@@ -1,0 +1,49 @@
+@use '../abstract/abstract_global';
+
+%base-btn {
+  border-radius: abstract_global.$border-rad-s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: abstract_global.$transition;
+  background-color: transparent;
+
+  & * {
+    transition: abstract_global.$transition;
+    flex-shrink: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.btn {
+  @extend %base-btn;
+  padding: abstract_global.rem(12px) abstract_global.rem(20px);
+
+  &_large {
+    @extend %base-btn;
+    border-radius: abstract_global.$border-rad-l;
+    padding: abstract_global.rem(20px) abstract_global.rem(32px);
+    color: abstract_global.$clr-static-white;
+    background-color: abstract_global.$clr-dark;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: abstract_global.$clr-dark;
+        background-color: abstract_global.$clr-static-white;
+      }
+    }
+  }
+
+  &_icon {
+    @extend %base-btn;
+    width: abstract_global.rem(56px);
+    aspect-ratio: 1;
+    border: 1px solid abstract_global.$clr-static-white;
+    border-radius: abstract_global.$border-rad-l;
+  }
+}
