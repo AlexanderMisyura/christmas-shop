@@ -1,0 +1,60 @@
+@use '../abstract/abstract_global';
+
+.footer {
+  &__container {
+    flex-direction: column;
+    gap: abstract_global.rem(60px);
+  }
+
+  &__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: abstract_global.rem(12px);
+  }
+
+  &__contact-card {
+    display: flex;
+    flex: 1 0 abstract_global.rem(371px);
+    flex-direction: column;
+    align-items: center;
+    gap: abstract_global.rem(12px);
+    padding: abstract_global.rem(20px);
+    border-radius: abstract_global.$border-rad-l;
+    background-color: abstract_global.$clr-content-background;
+    transition: abstract_global.$transition;
+
+    & * {
+      transition: abstract_global.$transition;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        cursor: pointer;
+
+        .footer__link,
+        .footer__heading {
+          color: abstract_global.$clr-primary;
+        }
+      }
+    }
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: abstract_global.rem(12px);
+  }
+
+  &__social {
+    display: flex;
+    gap: abstract_global.rem(12px);
+  }
+
+  &__social-icon {
+    display: flex;
+    padding: abstract_global.rem(8px);
+  }
+}
