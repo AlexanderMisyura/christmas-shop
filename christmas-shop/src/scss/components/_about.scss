@@ -1,0 +1,41 @@
+@use '../abstract/abstract_global';
+
+.about {
+  &__wrapper {
+    background-image: url(./assets/img/bg-snow.png);
+    background-color: abstract_global.$clr-primary;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &__container {
+    border-radius: abstract_global.$border-rad-l;
+    background-color: abstract_global.$clr-static-white;
+  }
+
+  &__content {
+    width: 50%;
+    display: flex;
+    align-items: center;
+
+    padding: 0 abstract_global.rem(60px);
+
+    .caption {
+      color: abstract_global.$clr-primary;
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: abstract_global.rem(20px);
+    padding: abstract_global.rem(60px) 0;
+  }
+
+  &__image {
+    display: block;
+    width: 50%;
+    border-radius: abstract_global.$border-rad-l;
+  }
+}
