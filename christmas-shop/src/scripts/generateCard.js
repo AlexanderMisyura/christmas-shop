@@ -7,7 +7,7 @@ export default class CardGenerator {
   generateCard(params) {
     const { name, category } = params;
 
-    const pathAddition = window.location.origin === '/' ? '' : '.';
+    const pathAddition = window.location.href.includes('/gifts/') ? '.' : '';
 
     const relatedData = {
       'For Work': {

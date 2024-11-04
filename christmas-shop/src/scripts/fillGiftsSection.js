@@ -197,30 +197,16 @@ export default function fillGiftsSection() {
   ];
 
   const cardContainer = document.querySelector('.cards');
-  let gifts;
+  let giftsData;
 
-  switch (window.location.pathname) {
-    case '/':
-      gifts = tempBestGiftsData.map((item) =>
-        new CardGenerator({
-          name: item.name,
-          category: item.category,
-        }).getCard()
-      );
-      cardContainer.append(...gifts);
-      break;
+  if (window.location.href.includes('/gifts/')) giftsData = tempGiftsData;
+  else giftsData = tempBestGiftsData;
 
-    case '/gifts/':
-      gifts = tempGiftsData.map((item) =>
-        new CardGenerator({
-          name: item.name,
-          category: item.category,
-        }).getCard()
-      );
-      cardContainer.append(...gifts);
-      break;
-
-    default:
-      break;
-  }
+  const gifts = giftsData.map((item) =>
+    new CardGenerator({
+      name: item.name,
+      category: item.category,
+    }).getCard()
+  );
+  cardContainer.append(...gifts);
 }
