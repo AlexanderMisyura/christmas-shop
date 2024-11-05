@@ -28,6 +28,12 @@
   &__link-list {
     display: flex;
     gap: abstract_global.rem(8px);
+
+    @media (max-width: abstract_global.$tablet-breakpoint) {
+      & {
+        display: none;
+      }
+    }
   }
 
   &__link {

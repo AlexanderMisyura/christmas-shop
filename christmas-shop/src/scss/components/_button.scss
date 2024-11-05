@@ -8,7 +8,11 @@
   transition: abstract_global.$transition;
   background-color: transparent;
 
-  & * {
+  & *,
+  &::before,
+  &::after,
+  & *::before,
+  & *::after {
     transition: abstract_global.$transition;
     flex-shrink: 0;
   }
@@ -45,5 +49,77 @@
     aspect-ratio: 1;
     border: 1px solid abstract_global.$clr-static-white;
     border-radius: abstract_global.$border-rad-l;
+  }
+
+  &_burger {
+    @extend %base-btn;
+    display: none;
+    border-radius: 0;
+
+    @media (max-width: abstract_global.$tablet-breakpoint) {
+      & {
+        display: flex;
+      }
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover .btn_burger__burger::before,
+      &:hover .btn_burger__burger::after {
+        background-color: abstract_global.$clr-primary;
+      }
+    }
+
+    &__burger {
+      position: relative;
+      height: abstract_global.rem(40px);
+      width: abstract_global.rem(40px);
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        background-color: abstract_global.$clr-dark;
+      }
+
+      &_default {
+        &::before,
+        &::after {
+          width: abstract_global.rem(20px);
+          height: abstract_global.rem(1px);
+        }
+
+        &::before {
+          top: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        &::after {
+          bottom: 15px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+      }
+
+      &_cross {
+        &::before,
+        &::after {
+          width: abstract_global.rem(20px);
+          height: abstract_global.rem(1px);
+        }
+
+        &::before {
+          top: 20px;
+          left: 50%;
+          transform: translateX(-50%) rotate(45deg);
+        }
+
+        &::after {
+          bottom: 19px;
+          left: 50%;
+          transform: translateX(-50%) rotate(-45deg);
+        }
+      }
+    }
   }
 }
