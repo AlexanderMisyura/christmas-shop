@@ -30,10 +30,11 @@
   &__tab {
     &.gifts__tab_active {
       cursor: default;
+      background-color: abstract_global.$clr-static-white-20;
     }
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover:not(.nav__link_active) {
+      &:hover:not(.gifts__tab_active) {
         background-color: abstract_global.$clr-static-white-20;
       }
     }

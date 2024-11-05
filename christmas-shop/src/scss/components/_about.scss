@@ -33,9 +33,12 @@
     padding: abstract_global.rem(60px) 0;
   }
 
-  &__image {
-    display: block;
+  &__image-container {
+    display: flex;
     width: 50%;
     border-radius: abstract_global.$border-rad-l;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
   }
 }

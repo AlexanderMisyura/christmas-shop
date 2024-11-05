@@ -33,6 +33,8 @@
   &__link {
     &.nav__link_active {
       cursor: default;
+      color: abstract_global.$clr-primary;
+      background-color: abstract_global.$clr-primary-10;
     }
 
     @media (hover: hover) and (pointer: fine) {
