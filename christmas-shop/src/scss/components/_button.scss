@@ -103,4 +103,25 @@
       }
     }
   }
+
+  &_up {
+    @extend %base-btn;
+    display: none;
+    position: fixed;
+    right: abstract_global.rem(8px);
+    bottom: abstract_global.rem(8px);
+    width: abstract_global.rem(56px);
+    aspect-ratio: 1;
+    border: 1px solid abstract_global.$clr-primary;
+    border-radius: abstract_global.rem(100px);
+    background-color: abstract_global.$clr-static-white;
+
+    @media (max-width: abstract_global.$tablet-breakpoint) {
+      display: flex;
+    }
+
+    &_disabled {
+      display: none;
+    }
+  }
 }
