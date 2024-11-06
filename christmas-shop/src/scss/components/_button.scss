@@ -53,14 +53,7 @@
 
   &_burger {
     @extend %base-btn;
-    display: none;
     border-radius: 0;
-
-    @media (max-width: abstract_global.$tablet-breakpoint) {
-      & {
-        display: flex;
-      }
-    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover .btn_burger__burger::before,
@@ -79,46 +72,34 @@
         content: '';
         position: absolute;
         background-color: abstract_global.$clr-dark;
+        width: abstract_global.rem(20px);
+        height: abstract_global.rem(1px);
       }
 
-      &_default {
-        &::before,
-        &::after {
-          width: abstract_global.rem(20px);
-          height: abstract_global.rem(1px);
-        }
-
-        &::before {
-          top: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        &::after {
-          bottom: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
+      &::before {
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
-      &_cross {
-        &::before,
-        &::after {
-          width: abstract_global.rem(20px);
-          height: abstract_global.rem(1px);
-        }
+      &::after {
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
 
-        &::before {
-          top: 20px;
-          left: 50%;
-          transform: translateX(-50%) rotate(45deg);
-        }
+    &_active {
+      & > .btn_burger__burger::before {
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%) rotate(45deg);
+      }
 
-        &::after {
-          bottom: 19px;
-          left: 50%;
-          transform: translateX(-50%) rotate(-45deg);
-        }
+      & > .btn_burger__burger::after {
+        bottom: 19px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-45deg);
       }
     }
   }

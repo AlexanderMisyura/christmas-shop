@@ -1,0 +1,47 @@
+@use '../abstract/abstract_global';
+
+.sidebar {
+  display: none;
+  position: absolute;
+  top: abstract_global.rem(64px);
+  right: 0;
+  height: calc(100dvh - abstract_global.rem(64px));
+  width: 0;
+  overflow: hidden;
+  transition: abstract_global.$transition;
+  background-color: abstract_global.$clr-static-white;
+
+  & * {
+    transition: abstract_global.$transition;
+  }
+
+  @media (max-width: abstract_global.$tablet-breakpoint) {
+    display: flex;
+  }
+
+  &_active {
+    width: 100%;
+  }
+
+  &__link-list {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: abstract_global.rem(8px);
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__link {
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.sidebar__link_active) {
+        color: abstract_global.$clr-primary;
+        background-color: abstract_global.$clr-primary-10;
+      }
+
+      &_active:hover {
+        cursor: default;
+      }
+    }
+  }
+}

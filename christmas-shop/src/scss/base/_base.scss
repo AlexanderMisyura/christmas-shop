@@ -109,3 +109,9 @@ body {
 .text-green {
   color: abstract_global.$clr-tag-green;
 }
+
+@media (max-width: abstract_global.$tablet-breakpoint) {
+  .scroll-disabled {
+    overflow: hidden;
+  }
+}
