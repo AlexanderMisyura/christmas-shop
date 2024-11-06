@@ -12,6 +12,9 @@ module.exports = ({ development }) => ({
     filename: '[name].[contenthash].js',
     clean: true,
   },
+  optimization: {
+    minimize: false,
+  },
   module: {
     rules: [
       {
