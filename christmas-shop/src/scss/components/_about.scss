@@ -12,6 +12,10 @@
   &__container {
     border-radius: abstract_global.$border-rad-l;
     background-color: abstract_global.$clr-static-white;
+
+    @media (max-width: abstract_global.$mobile-breakpoint) {
+      flex-direction: column;
+    }
   }
 
   &__content {
@@ -20,6 +24,12 @@
     align-items: center;
 
     padding: 0 abstract_global.rem(60px);
+
+    @media (max-width: abstract_global.$mobile-breakpoint) {
+      width: 100%;
+      padding-left: abstract_global.rem(20px);
+      padding-right: abstract_global.rem(20px);
+    }
 
     .caption {
       color: abstract_global.$clr-primary;
@@ -40,5 +50,9 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
+
+    @media (max-width: abstract_global.$mobile-breakpoint) {
+      width: 100%;
+    }
   }
 }
