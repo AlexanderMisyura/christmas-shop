@@ -25,6 +25,12 @@
     color: abstract_global.$clr-static-white;
     display: flex;
     gap: abstract_global.rem(8px);
+
+    @media (max-width:abstract_global.$mobile-breakpoint) {
+      & {
+        gap: 0;
+      }
+    }
   }
 
   &__tab {
@@ -36,6 +42,13 @@
     @media (hover: hover) and (pointer: fine) {
       &:hover:not(.gifts__tab_active) {
         background-color: abstract_global.$clr-static-white-20;
+      }
+    }
+
+    @media (max-width:abstract_global.$mobile-breakpoint) {
+      & {
+        padding-left: abstract_global.rem(8px);
+        padding-right: abstract_global.rem(8px);
       }
     }
   }
