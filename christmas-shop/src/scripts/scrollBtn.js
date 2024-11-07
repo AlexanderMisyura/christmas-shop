@@ -1,4 +1,8 @@
 export default function scrollBtn() {
+  if (!window.location.href.includes('/gifts/')) {
+    return;
+  }
+
   const btn = document.querySelector('.btn_up');
 
   btn.addEventListener('click', () => {
