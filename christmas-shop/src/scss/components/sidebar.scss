@@ -11,12 +11,12 @@
   overflow: hidden;
   transition:
     opacity 0.5s,
-    width 0.3s ease-out;
+    width 0.2s ease-out;
   background-color: abstract_global.$clr-static-white;
   color: abstract_global.$clr-static-white;
 
   & * {
-    transition: color 0.3s;
+    transition: color 0.2s;
   }
 
   @media (max-width: abstract_global.$tablet-breakpoint) {

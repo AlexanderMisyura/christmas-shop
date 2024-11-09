@@ -1,8 +1,9 @@
-import { checkIsHomePage } from "./utils";
+import { checkIsHomePage } from './utils';
 
 const SLIDER_FULL_WIDTH = 1991;
 const WIDE_SCREEN_STEPS = 3;
 const NARROW_SCREEN_STEPS = 6;
+const TRANSITION = '0.3s cubic-bezier(0.39, 0.58, 0.57, 1)';
 
 export default class Slider {
   slider;
@@ -62,7 +63,7 @@ export default class Slider {
   handleLeft() {
     if (this.left.isBlocked) return;
 
-    this.slider.style.transition = 'all 0.3s ease-in';
+    this.slider.style.transition = TRANSITION;
 
     this.enableButton('right');
     this.updateWidthsData();
@@ -80,7 +81,7 @@ export default class Slider {
   handleRight() {
     if (this.right.element.isBlocked) return;
 
-    this.slider.style.transition = 'all 0.3s ease-in';
+    this.slider.style.transition = TRANSITION;
 
     this.enableButton('left');
     this.updateWidthsData();

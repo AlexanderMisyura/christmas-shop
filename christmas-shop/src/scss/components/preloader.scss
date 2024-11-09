@@ -1,5 +1,5 @@
 body:not(.loading) {
-  & > *:not(.modal, .preloader) {
+  & > *:not(.modal, .preloader, .btn_up, .sidebar) {
     animation: show 0.5s linear;
   }
 }
