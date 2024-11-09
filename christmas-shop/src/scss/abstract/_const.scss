@@ -9,10 +9,13 @@ $clr-tag-purple: #4361ff;
 $clr-tag-pink: #ff43f7;
 $clr-tag-green: #06a44f;
 $clr-content-background: #ecf3f8;
+$clr-backdrop: rgba(24, 28, 41, 0.8);
 
 // -----WIDTHS AND BREAKPOINTS-----
 $desktop-max-width: 1440px;
 $desktop-max-container-width: 1276px;
+
+$modal-max-width: 400px;
 
 $tablet-breakpoint: 768px;
 $mobile-breakpoint: 600px;

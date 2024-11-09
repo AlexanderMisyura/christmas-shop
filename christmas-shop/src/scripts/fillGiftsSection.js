@@ -197,6 +197,7 @@ export default function fillGiftsSection() {
   ];
 
   const cardContainer = document.querySelector('.cards');
+  const modal = document.querySelector('.modal');
   let giftsData;
 
   if (window.location.href.includes('/gifts/')) giftsData = tempGiftsData;
@@ -206,7 +207,7 @@ export default function fillGiftsSection() {
     new CardGenerator({
       name: item.name,
       category: item.category,
-    }).getCard()
+    }, modal).getCard()
   );
   cardContainer.append(...gifts);
 }
