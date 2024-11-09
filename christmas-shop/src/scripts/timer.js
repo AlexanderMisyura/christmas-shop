@@ -5,7 +5,13 @@ export default class Timer {
     this.create(element);
   }
 
+  isHomePage() {
+    return !window.location.href.includes('/gifts/');
+  }
+
   create(element) {
+    if (!this.isHomePage()) return;
+
     this.timer = element;
     this.days = this.timer.querySelector('.days');
     this.hours = this.timer.querySelector('.hours');
@@ -19,12 +25,13 @@ export default class Timer {
     const currentDate = new Date();
     const currentUTCDate = new Date(
       Date.UTC(
-      currentDate.getUTCFullYear(),
-      currentDate.getUTCMonth(),
-      currentDate.getUTCDate(),
-      currentDate.getUTCHours(),
-      currentDate.getUTCMinutes(),
-      currentDate.getUTCSeconds())
+        currentDate.getUTCFullYear(),
+        currentDate.getUTCMonth(),
+        currentDate.getUTCDate(),
+        currentDate.getUTCHours(),
+        currentDate.getUTCMinutes(),
+        currentDate.getUTCSeconds()
+      )
     );
 
     const newYearUTC = new Date(Date.UTC(currentUTCDate.getUTCFullYear() + 1));
@@ -46,6 +53,8 @@ export default class Timer {
   }
 
   run() {
+    if (!this.isHomePage()) return;
+
     setInterval(() => {
       this.updateTime();
       this.updateDOM();

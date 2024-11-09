@@ -121,6 +121,8 @@ export default class Slider {
   }
 
   listen() {
+    if (!this.isHomePage()) return;
+
     window.addEventListener('resize', this.handleResize.bind(this));
     this.left.element.addEventListener('click', this.left.handler);
     this.right.element.addEventListener('click', this.right.handler);
