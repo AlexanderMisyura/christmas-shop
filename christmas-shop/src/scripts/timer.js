@@ -1,3 +1,5 @@
+import { checkIsHomePage } from "./utils";
+
 export default class Timer {
   remaining;
 
@@ -5,12 +7,8 @@ export default class Timer {
     this.create(element);
   }
 
-  isHomePage() {
-    return !window.location.href.includes('/gifts/');
-  }
-
   create(element) {
-    if (!this.isHomePage()) return;
+    if (!checkIsHomePage()) return;
 
     this.timer = element;
     this.days = this.timer.querySelector('.days');
@@ -53,7 +51,7 @@ export default class Timer {
   }
 
   run() {
-    if (!this.isHomePage()) return;
+    if (!checkIsHomePage()) return;
 
     setInterval(() => {
       this.updateTime();

@@ -1,3 +1,5 @@
+import { checkIsHomePage } from "./utils";
+
 export default class CardGenerator {
   card;
   constructor(params, modal) {
@@ -7,7 +9,7 @@ export default class CardGenerator {
   generateCard(params, modal) {
     const { name, category } = params;
 
-    const pathAddition = window.location.href.includes('/gifts/') ? '.' : '';
+    const pathAddition = checkIsHomePage() ? '' : '.';
 
     const relatedData = {
       'For Work': {

@@ -1,4 +1,5 @@
 import CardGenerator from './generateCard';
+import { checkIsHomePage } from './utils';
 
 export default function fillGiftsSection() {
   const tempBestGiftsData = [
@@ -200,8 +201,8 @@ export default function fillGiftsSection() {
   const modal = document.querySelector('.modal');
   let giftsData;
 
-  if (window.location.href.includes('/gifts/')) giftsData = tempGiftsData;
-  else giftsData = tempBestGiftsData;
+  if (checkIsHomePage()) giftsData =tempBestGiftsData;
+  else giftsData = tempGiftsData;
 
   const gifts = giftsData.map((item) =>
     new CardGenerator({

@@ -1,3 +1,5 @@
+import { checkIsHomePage } from "./utils";
+
 const SLIDER_FULL_WIDTH = 1991;
 const WIDE_SCREEN_STEPS = 3;
 const NARROW_SCREEN_STEPS = 6;
@@ -16,7 +18,7 @@ export default class Slider {
   }
 
   create(parentElement) {
-    if (!this.isHomePage()) return;
+    if (!checkIsHomePage()) return;
 
     this.slider = parentElement.querySelector('.slider-row__content');
     this.left = {
@@ -38,10 +40,6 @@ export default class Slider {
 
   move(offset) {
     this.slider.style.right = `${offset}px`;
-  }
-
-  isHomePage() {
-    return !window.location.href.includes('/gifts/');
   }
 
   updateWidthsData() {
@@ -121,7 +119,7 @@ export default class Slider {
   }
 
   listen() {
-    if (!this.isHomePage()) return;
+    if (!checkIsHomePage()) return;
 
     window.addEventListener('resize', this.handleResize.bind(this));
     this.left.element.addEventListener('click', this.left.handler);

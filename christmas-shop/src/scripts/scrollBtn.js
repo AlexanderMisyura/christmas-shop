@@ -1,7 +1,7 @@
+import { checkIsHomePage } from './utils';
+
 export default function scrollBtn() {
-  if (!window.location.href.includes('/gifts/')) {
-    return;
-  }
+  if (checkIsHomePage()) return;
 
   const btn = document.querySelector('.btn_up');
 
