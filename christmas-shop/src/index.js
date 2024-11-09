@@ -1,16 +1,18 @@
 import './main.scss';
 
 import preloader from './scripts/preloader';
-import fillGiftsSection from './scripts/fillGiftsSection';
+import Gifts from './scripts/gifts';
 import toggleSidebar from './scripts/processSidebar';
 import scrollBtn from './scripts/scrollBtn';
 import Slider from './scripts/slider';
 import Timer from './scripts/timer';
 
 preloader();
-fillGiftsSection();
 toggleSidebar();
 scrollBtn();
+
+const gifts = new Gifts();
+gifts.listen();
 
 const slider = new Slider(document.querySelector('.slider-row'));
 slider.listen();

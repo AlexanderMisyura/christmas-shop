@@ -1,214 +1,68 @@
 import CardGenerator from './generateCard';
-import { checkIsHomePage } from './utils';
+import gifts from '../gifts.json';
+import { checkIsHomePage, shuffle } from './utils';
 
-export default function fillGiftsSection() {
-  const tempBestGiftsData = [
-    {
-      name: 'Console.log Guru',
-      description: 'Uses console.log like a crystal ball to find any issue.',
-      category: 'For Work',
-      superpowers: {
-        live: '+500',
-        create: '+500',
-        love: '+200',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Hydration Bot',
-      description:
-        'Drinks the recommended 2 liters of water a day like a health-programmed robot.',
-      category: 'For Health',
-      superpowers: {
-        live: '+500',
-        create: '+300',
-        love: '+500',
-        dream: '+500',
-      },
-    },
-    {
-      name: 'Merge Master',
-      description:
-        'Merges branches in Git without conflicts, like a wizard during an exam.',
-      category: 'For Work',
-      superpowers: {
-        live: '+200',
-        create: '+500',
-        love: '+200',
-        dream: '+300',
-      },
-    },
-    {
-      name: 'Spontaneous Coding Philosopher',
-      description:
-        'Philosophically accepts any client suggestion after a long refactor.',
-      category: 'For Harmony',
-      superpowers: {
-        live: '+300',
-        create: '+200',
-        love: '+500',
-        dream: '+400',
-      },
-    },
-  ];
+export default class Gifts {
+  container = document.querySelector('.cards');
+  modal = document.querySelector('.modal');
+  tabs = document.querySelector('.tabs');
+  data = gifts;
 
-  const tempGiftsData = [
-    {
-      name: 'Console.log Guru',
-      description: 'Uses console.log like a crystal ball to find any issue.',
-      category: 'For Work',
-      superpowers: {
-        live: '+500',
-        create: '+500',
-        love: '+200',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Step Master',
-      description:
-        'Gets 10,000 steps a day even while sitting at the computer.',
-      category: 'For Health',
-      superpowers: {
-        live: '+400',
-        create: '+300',
-        love: '+500',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Bug Magnet',
-      description:
-        'Able to find bugs in code like they were placed there on purpose.',
-      category: 'For Work',
-      superpowers: {
-        live: '+500',
-        create: '+500',
-        love: '+200',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Shortcut Cheater',
-      description:
-        'Knows every keyboard shortcut like they were born with them.',
-      category: 'For Work',
-      superpowers: {
-        live: '+500',
-        create: '+500',
-        love: '+400',
-        dream: '+200',
-      },
-    },
-    {
-      name: 'Posture Levitation',
-      description:
-        'Can sit for hours, but maintains perfect posture like a ballerina.',
-      category: 'For Health',
-      superpowers: {
-        live: '+400',
-        create: '+500',
-        love: '+500',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Bug Acceptance Guru',
-      description:
-        'Accepts bugs as part of the journey to perfection — it’s just another task.',
-      category: 'For Harmony',
-      superpowers: {
-        live: '+300',
-        create: '+200',
-        love: '+500',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Snack Resister',
-      description: 'Ignoring desktop snacks like a strict dietician.',
-      category: 'For Health',
-      superpowers: {
-        live: '+400',
-        create: '+100',
-        love: '+200',
-        dream: '+400',
-      },
-    },
-    {
-      name: 'Error Laugher',
-      description:
-        'Laughs at code errors like they’re jokes instead of getting angry.',
-      category: 'For Harmony',
-      superpowers: {
-        live: '+300',
-        create: '+200',
-        love: '+500',
-        dream: '+500',
-      },
-    },
-    {
-      name: 'Hydration Bot',
-      description:
-        'Drinks the recommended 2 liters of water a day like a health-programmed robot.',
-      category: 'For Health',
-      superpowers: {
-        live: '+500',
-        create: '+300',
-        love: '+500',
-        dream: '+500',
-      },
-    },
-    {
-      name: 'Merge Master',
-      description:
-        'Merges branches in Git without conflicts, like a wizard during an exam.',
-      category: 'For Work',
-      superpowers: {
-        live: '+200',
-        create: '+500',
-        love: '+200',
-        dream: '+300',
-      },
-    },
-    {
-      name: 'Joy Charger',
-      description:
-        'Finds joy in the little things—even in a build that finishes unexpectedly fast.',
-      category: 'For Harmony',
-      superpowers: {
-        live: '+200',
-        create: '+200',
-        love: '+500',
-        dream: '+500',
-      },
-    },
-    {
-      name: 'Spontaneous Coding Philosopher',
-      description:
-        'Philosophically accepts any client suggestion after a long refactor.',
-      category: 'For Harmony',
-      superpowers: {
-        live: '+300',
-        create: '+200',
-        love: '+500',
-        dream: '+400',
-      },
-    },
-  ];
+  constructor(category = 'all') {
+    this.refillCardsContainer(category);
+  }
 
-  const cardContainer = document.querySelector('.cards');
-  const modal = document.querySelector('.modal');
-  let giftsData;
+  refillCardsContainer(category) {
+    this.clearCardsContainer();
 
-  if (checkIsHomePage()) giftsData =tempBestGiftsData;
-  else giftsData = tempGiftsData;
+    let outputData;
 
-  const gifts = giftsData.map((item) =>
-    new CardGenerator({
-      name: item.name,
-      category: item.category,
-    }, modal).getCard()
-  );
-  cardContainer.append(...gifts);
+    if (checkIsHomePage()) {
+      outputData = shuffle(this.data).slice(0, 4);
+    } else if (category === 'all') {
+      outputData = this.data;
+    } else {
+      outputData = this.data.filter((item) => item.category === category);
+    }
+
+    const cards = this.generateCards(outputData);
+    this.container.append(...cards);
+  }
+
+  generateCards(data) {
+    return data.map((item) =>
+      new CardGenerator(
+        {
+          name: item.name,
+          category: item.category,
+        },
+        modal
+      ).getCard()
+    );
+  }
+
+  clearCardsContainer() {
+    this.container.innerHTML = '';
+  }
+
+  handleTabs(e) {
+    const tab = e.target.closest('.tab');
+    if (!tab || tab.classList.contains('gifts__tab_active')) {
+      return;
+    }
+
+    const category = tab.dataset.category;
+    this.refillCardsContainer(category);
+
+    [...this.tabs.children].forEach((tab) =>
+      tab.classList.remove('gifts__tab_active')
+    );
+
+    tab.classList.add('gifts__tab_active');
+  }
+
+  listen() {
+    if (checkIsHomePage()) return;
+    this.tabs.addEventListener('click', this.handleTabs.bind(this));
+  }
 }
