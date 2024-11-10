@@ -25,8 +25,10 @@ export default function processSidebar() {
   function closeSidebar() {
     burger.classList.remove('btn_burger_active');
 
-    document.body.classList.remove('scroll-disabled');
-    document.body.style = '';
+    if (document.body.classList.contains('scroll-disabled')) {
+      document.body.style = '';
+      document.body.classList.remove('scroll-disabled');
+    }
 
     sidebar.classList.remove('sidebar_active');
   }

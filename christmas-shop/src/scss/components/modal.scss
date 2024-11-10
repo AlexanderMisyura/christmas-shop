@@ -1,14 +1,5 @@
 @use '../abstract/abstract_global';
 
-// .backdrop {
-//   display: none;
-//   position: fixed;
-//   background-color: transparent;
-//   width: 100vw;
-//   height: 100dvh;
-//   // z-index: -1;
-// }
-
 .modal {
   border: none;
   border-radius: abstract_global.$border-rad-l;

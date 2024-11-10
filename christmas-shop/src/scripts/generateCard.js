@@ -32,6 +32,7 @@ export default class CardGenerator {
     this.card = document.createElement('button');
     this.card.classList.add('card');
     this.card.popoverTargetElement = modal;
+    this.card.dataset.cardName = name;
 
     const cardImg = document.createElement('img');
     cardImg.classList.add('card__img');
