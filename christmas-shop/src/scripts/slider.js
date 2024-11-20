@@ -1,6 +1,5 @@
 import { checkIsHomePage } from './utils';
 
-const SLIDER_FULL_WIDTH = 1991;
 const WIDE_SCREEN_STEPS = 3;
 const NARROW_SCREEN_STEPS = 6;
 const TRANSITION = '0.3s cubic-bezier(0.39, 0.58, 0.57, 1)';
@@ -32,8 +31,9 @@ export default class Slider {
       isBlocked: false,
       handler: () => this.handleRight(),
     };
+    this.maxWidth = this.slider.scrollWidth;
     this.currentWidth = this.slider.clientWidth;
-    this.maxOffset = SLIDER_FULL_WIDTH - this.currentWidth;
+    this.maxOffset = this.maxWidth - this.currentWidth;
     this.currentOffset = 0;
     this.stepNumber = WIDE_SCREEN_STEPS;
     this.stepWidth = Math.ceil(this.maxOffset / this.stepNumber);
@@ -46,7 +46,7 @@ export default class Slider {
   updateWidthsData() {
     this.stepNumber =
       window.innerWidth >= 768 ? WIDE_SCREEN_STEPS : NARROW_SCREEN_STEPS;
-    this.maxOffset = SLIDER_FULL_WIDTH - this.slider.clientWidth;
+    this.maxOffset = this.maxWidth - this.slider.clientWidth;
     this.stepWidth = Math.ceil(this.maxOffset / this.stepNumber);
   }
 

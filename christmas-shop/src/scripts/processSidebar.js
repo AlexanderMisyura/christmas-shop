@@ -41,15 +41,17 @@ export default function processSidebar() {
 
   function followLink(e) {
     e.preventDefault();
-    if (e.target.tagName === 'A') {
+    const link = e.target.closest('.sidebar__link');
+
+    if (!link) return;
+
+    if (link.classList.contains('sidebar__link_active')) {
+      closeSidebar();
+    } else {
       closeSidebar();
       setTimeout(() => {
-        location.href = e.target.href;
-      }, 300);
-    }
-
-    if (e.target.tagName === 'SPAN') {
-      closeSidebar();
+        location.href = link.href;
+      }, 200);
     }
   }
 
