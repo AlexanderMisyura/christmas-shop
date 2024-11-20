@@ -12,8 +12,15 @@ export default function scrollBtn() {
   window.addEventListener('scroll', () => {
     if (window.scrollY === 0) {
       btn.classList.add('btn_up_disabled');
-    } else if (btn.classList.contains('btn_up_disabled')) {
-      btn.classList.remove('btn_up_disabled');
+      btn.classList.remove('btn_up_shown');
+    } else if (window.scrollY >= 300) {
+      if (btn.classList.contains('btn_up_disabled')) {
+        btn.classList.remove('btn_up_disabled');
+      }
+
+      if (!btn.classList.contains('btn_up_shown')) {
+        btn.classList.add('btn_up_shown');
+      }
     }
   });
 }

@@ -1,0 +1,77 @@
+@use '../abstract/abstract_global';
+
+@keyframes scale-card-image {
+  0% {
+    scale: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes highlight-card-image {
+  0% {
+    filter: sepia(100%);
+  }
+  100% {
+    filter: sepia(0%);
+  }
+}
+
+@keyframes drop-btn_up-in {
+  0% {
+    display: none;
+    bottom: calc(100dvh / 10);
+    right: abstract_global.rem(-56px);
+  }
+
+  100% {
+    display: flex;
+    bottom: abstract_global.rem(8px);
+    right: abstract_global.rem(8px);
+  }
+}
+
+@keyframes drop-btn_up-out {
+  0% {
+    display: flex;
+    bottom: abstract_global.rem(8px);
+    right: abstract_global.rem(8px);
+  }
+
+  100% {
+    display: none;
+    bottom: calc(100dvh / 10);
+    right: abstract_global.rem(-56px);
+  }
+}
+
+@keyframes scale-btn_up-in {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+@keyframes scale-btn_up-out {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0;
+  }
+}
+
+@keyframes scale-arrow {
+  0% {
+    scale: 1.1;
+  }
+  100% {
+    scale: 1.5;
+  }
+}

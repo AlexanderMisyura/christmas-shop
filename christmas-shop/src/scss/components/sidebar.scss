@@ -2,22 +2,15 @@
 
 .sidebar {
   display: none;
-  opacity: 0;
   position: absolute;
   top: abstract_global.rem(63px);
   right: 0;
   height: calc(100dvh - abstract_global.rem(64px) + 1px);
   width: 0;
   overflow: hidden;
-  transition:
-    opacity 0.5s,
-    width 0.2s ease-out;
+  transition: width 0.2s ease-out;
   background-color: abstract_global.$clr-static-white;
   color: abstract_global.$clr-static-white;
-
-  & * {
-    transition: color 0.2s;
-  }
 
   @media (max-width: abstract_global.$tablet-breakpoint) {
     display: flex;
@@ -25,8 +18,21 @@
 
   &_active {
     width: 100%;
-    opacity: 1;
-    color: abstract_global.$clr-dark;
+    color: inherit;
+
+    .sidebar__link {
+      @media (hover: hover) and (pointer: fine) {
+        &_active,
+        &:hover:not(.sidebar__link_active) {
+          color: abstract_global.$clr-primary;
+          background-color: abstract_global.$clr-primary-10;
+        }
+
+        &_active:hover {
+          cursor: default;
+        }
+      }
+    }
   }
 
   &__link-list {
@@ -36,18 +42,5 @@
     gap: abstract_global.rem(8px);
     justify-content: center;
     align-items: center;
-  }
-
-  &__link {
-    @media (hover: hover) and (pointer: fine) {
-      &:hover:not(.sidebar__link_active) {
-        color: abstract_global.$clr-primary;
-        background-color: abstract_global.$clr-primary-10;
-      }
-
-      &_active:hover {
-        cursor: default;
-      }
-    }
   }
 }
