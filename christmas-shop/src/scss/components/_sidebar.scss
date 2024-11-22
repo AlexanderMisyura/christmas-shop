@@ -11,6 +11,7 @@
   transition: width 0.2s ease-out;
   background-color: abstract_global.$clr-static-white;
   color: abstract_global.$clr-static-white;
+  z-index: 2;
 
   @media (max-width: abstract_global.$tablet-breakpoint) {
     display: flex;
@@ -21,8 +22,12 @@
     color: inherit;
 
     .sidebar__link {
+      &_active {
+        color: abstract_global.$clr-primary;
+        background-color: abstract_global.$clr-primary-10;
+      }
+
       @media (hover: hover) and (pointer: fine) {
-        &_active,
         &:hover:not(.sidebar__link_active) {
           color: abstract_global.$clr-primary;
           background-color: abstract_global.$clr-primary-10;

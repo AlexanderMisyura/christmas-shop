@@ -73,7 +73,9 @@
         background-color: abstract_global.$clr-dark;
         width: abstract_global.rem(20px);
         height: abstract_global.rem(1px);
-        transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+        transition:
+          transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+          background-color 0.3s ease-in;
       }
 
       &::before {
