@@ -1,5 +1,6 @@
 import { checkIsHomePage } from './utils';
 
+const TABLET_WIDTH = 768;
 const WIDE_SCREEN_STEPS = 3;
 const NARROW_SCREEN_STEPS = 6;
 const TRANSITION = '0.3s cubic-bezier(0.39, 0.58, 0.57, 1)';
@@ -44,8 +45,11 @@ export default class Slider {
   }
 
   updateWidthsData() {
+    this.maxWidth = this.slider.scrollWidth;
     this.stepNumber =
-      window.innerWidth >= 768 ? WIDE_SCREEN_STEPS : NARROW_SCREEN_STEPS;
+      window.innerWidth > TABLET_WIDTH
+        ? WIDE_SCREEN_STEPS
+        : NARROW_SCREEN_STEPS;
     this.maxOffset = this.maxWidth - this.slider.clientWidth;
     this.stepWidth = Math.ceil(this.maxOffset / this.stepNumber);
   }
