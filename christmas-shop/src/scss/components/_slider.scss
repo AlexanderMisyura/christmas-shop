@@ -2,13 +2,10 @@
 
 .slider {
   &__wrapper {
-    background-image: url(./assets/img/bg-snow.png);
     background-color: abstract_global.$clr-primary;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     overflow: hidden;
   }
+
   &__container {
     flex-direction: column;
     gap: abstract_global.rem(20px);

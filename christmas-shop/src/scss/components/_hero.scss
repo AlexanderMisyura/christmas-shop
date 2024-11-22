@@ -5,12 +5,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-image: url(./assets/img/bg-ball.png);
+    background-color: abstract_global.$clr-primary;
     border-top-left-radius: abstract_global.$border-rad-l;
     border-top-right-radius: abstract_global.$border-rad-l;
-
-    background-image: url(./assets/img/bg-ball.png),
-      url(./assets/img/bg-snow.png);
-    background-color: abstract_global.$clr-primary;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
