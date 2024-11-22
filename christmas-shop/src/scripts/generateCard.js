@@ -39,7 +39,7 @@ export default class CardGenerator {
     cardImg.src = relatedData[category].imgSrc;
     cardImg.alt = relatedData[category].imgAlt;
 
-    const cardFooter = document.createElement('div');
+    const cardFooter = document.createElement('span');
     cardFooter.classList.add('card__footer');
 
     const cardCaption = document.createElement('span');
@@ -50,7 +50,7 @@ export default class CardGenerator {
     );
     cardCaption.textContent = category;
 
-    const cardHeading = document.createElement('h3');
+    const cardHeading = document.createElement('span');
     cardHeading.classList.add('card__heading', 'heading-3');
     cardHeading.textContent = name;
 
