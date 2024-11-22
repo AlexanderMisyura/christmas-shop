@@ -31,7 +31,8 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  font-family: Montserrat;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
   color: abstract_global.$clr-dark;
 }
 
@@ -56,24 +57,24 @@ body {
 .heading-1 {
   font-size: abstract_global.rem(32px);
   line-height: 150%;
-  letter-spacing: 5.59px;
+  letter-spacing: 0.18em;
 }
 .heading-2,
 .action-large {
   font-size: abstract_global.rem(24px);
   line-height: 152%;
-  letter-spacing: 3.84px;
+  letter-spacing: 0.16em;
 }
 .heading-3 {
   font-size: abstract_global.rem(16px);
   line-height: 152%;
-  letter-spacing: 1.28px;
+  letter-spacing: 0.08em;
 }
 .heading-4,
 .action-small {
   font-size: abstract_global.rem(12px);
   line-height: 130%;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.05em;
 }
 
 .paragraph {
@@ -83,11 +84,11 @@ body {
 }
 
 .caption {
-  font-family: Allura;
+  font-family: 'Allura', cursive;
   font-size: abstract_global.rem(24px);
   font-weight: 400;
   line-height: 100%;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.05em;
 }
 
 .slider-text {
