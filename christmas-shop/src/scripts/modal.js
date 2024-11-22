@@ -1,6 +1,8 @@
 import gifts from '../gifts.json';
 import { checkIsHomePage } from './utils';
 
+const EASING_FUNCTION = `linear(0 0%, 0 1.8%, 0.01 3.6%, 0.03 6.35%, 0.07 9.1%, 0.13 11.4%, 0.19 13.4%, 0.27 15%, 0.34 16.1%, 0.54 18.35%, 0.66 20.6%, 0.72 22.4%, 0.77 24.6%, 0.81 27.3%, 0.85 30.4%, 0.88 35.1%, 0.92 40.6%, 0.94 47.2%, 0.96 55%, 0.98 64%, 0.99 74.4%, 1 86.4%, 1 100%)`;
+
 export default class Modal {
   pathAddition = checkIsHomePage() ? '' : '.';
   relatedData = {
@@ -37,9 +39,41 @@ export default class Modal {
     this.modal.addEventListener('toggle', this.handleScroll);
   }
 
+  getStartPosition(card) {
+    const cardRect = card.getBoundingClientRect();
+    return {
+      x: cardRect.x + cardRect.width / 2,
+      y: cardRect.y + cardRect.height / 2,
+    };
+  }
+
   handleModal(e) {
     const card = e.target.closest('.card');
     if (!card) return;
+
+    const startPosition = this.getStartPosition(card);
+
+    this.modal.animate(
+      [
+        {
+          top: `${startPosition.y}px`,
+          left: `${startPosition.x}px`,
+          transform: 'translate(-50%, -50%) scale(0.7)',
+          opacity: 0,
+        },
+        {
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%) scale(1)',
+          opacity: 1,
+        },
+      ],
+      {
+        duration: 700,
+        easing: EASING_FUNCTION,
+        fill: 'forwards',
+      }
+    );
 
     const cardName = card.dataset.cardName;
     const cardData = gifts.find((card) => card.name === cardName);
