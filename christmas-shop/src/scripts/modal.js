@@ -89,31 +89,36 @@ export default class Modal {
         Math.abs(viewportCenter.y - startPosition.y)
       );
 
-      const offsetPercentage =
+      const intensityPercentage =
         (distanceFromStartToCenter / viewportHalfDiagonal) * 100;
 
-      const keyframes = [];
-      const duration = 1000;
-      const frames = 30;
-      const damping = 3;
-      const maxAngle = 15;
-      const maxTranslateX = offsetPercentage + 30;
+      function generateKeyframes(intensity) {
+        const keyframes = [];
+        const frames = 30;
+        const damping = 3;
+        const maxAngle = 15 + intensity / 4;
+        const maxTranslateX = intensity + 30;
 
-      for (let i = 1; i <= frames; i++) {
-        const progress = i / frames;
-        const angle =
-          Math.sin(progress * Math.PI * 6) * Math.exp(-damping * progress);
-        const translateX =
-          Math.sin(progress * Math.PI * 6) *
-          maxTranslateX *
-          Math.exp(-damping * progress);
-        keyframes.push({
-          transform: `rotate(${angle * maxAngle}deg) translate(${-translateX}px)`,
-        });
+        for (let i = 1; i <= frames; i++) {
+          const progress = i / frames;
+          const angle =
+            Math.sin(progress * Math.PI * 6) * Math.exp(-damping * progress);
+          const translateX =
+            Math.sin(progress * Math.PI * 6) *
+            maxTranslateX *
+            Math.exp(-damping * progress);
+          keyframes.push({
+            transform: `rotate(${angle * maxAngle}deg) translate(${-translateX}px)`,
+          });
+        }
+
+        return keyframes;
       }
 
+      const keyframes = generateKeyframes(intensityPercentage);
+
       this.modalImage.animate(keyframes, {
-        duration,
+        duration: 1000,
         fill: 'forwards',
       });
     }
