@@ -4,16 +4,25 @@ const TABLET_WIDTH = 768;
 const WIDE_SCREEN_STEPS = 3;
 const NARROW_SCREEN_STEPS = 6;
 const TRANSITION = '0.3s cubic-bezier(0.39, 0.58, 0.57, 1)';
+const IS_SLIDER_POSITION_HELD = false;
 
 export default class Slider {
   slider;
+
   left;
+
   right;
+
   currentWidth;
+
   maxOffset;
+
   currentOffset;
+
   stepNumber;
+
   stepWidth;
+
   constructor(parentElement) {
     this.create(parentElement);
   }
@@ -76,7 +85,7 @@ export default class Slider {
       this.currentOffset = 0;
       this.disableButton('left');
     } else {
-      this.currentOffset = this.currentOffset - this.stepWidth;
+      this.currentOffset -= this.stepWidth;
     }
 
     this.move(this.currentOffset);
@@ -94,32 +103,41 @@ export default class Slider {
       this.currentOffset = this.maxOffset;
       this.disableButton('right');
     } else {
-      this.currentOffset = this.currentOffset + this.stepWidth;
+      this.currentOffset += this.stepWidth;
     }
 
     this.move(this.currentOffset);
   }
 
-  handleResize() {
-    this.slider.style.transition = 'none';
-    this.updateWidthsData();
-    this.currentOffset += 0.5 * (this.currentWidth - this.slider.clientWidth);
-    this.currentWidth = this.slider.clientWidth;
+  holdSliderPosition(isHeld) {
+    if (isHeld) {
+      this.slider.style.transition = 'none';
+      this.currentOffset += 0.5 * (this.currentWidth - this.slider.clientWidth);
+      this.currentWidth = this.slider.clientWidth;
 
-    if (this.currentOffset >= this.maxOffset) {
-      this.currentOffset = this.maxOffset;
-      this.disableButton('right');
+      if (this.currentOffset >= this.maxOffset) {
+        this.currentOffset = this.maxOffset;
+        this.disableButton('right');
+      } else {
+        this.enableButton('right');
+      }
+
+      if (this.currentOffset <= 0) {
+        this.currentOffset = 0;
+        this.disableButton('left');
+      } else {
+        this.enableButton('left');
+      }
     } else {
-      this.enableButton('right');
-    }
-
-    if (this.currentOffset <= 0) {
-      this.currentOffset = 0;
       this.disableButton('left');
-    } else {
-      this.enableButton('left');
+      this.enableButton('right');
+      this.currentOffset = 0;
     }
+  }
 
+  handleResize() {
+    this.updateWidthsData();
+    this.holdSliderPosition(IS_SLIDER_POSITION_HELD);
     this.move(this.currentOffset);
   }
 
