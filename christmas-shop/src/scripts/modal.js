@@ -2,30 +2,30 @@ import gifts from '../gifts.json';
 import { checkIsHomePage } from './utils';
 
 const EASING_FUNCTION = `linear(0 0%, 0 1.8%, 0.01 3.6%, 0.03 6.35%, 0.07 9.1%, 0.13 11.4%, 0.19 13.4%, 0.27 15%, 0.34 16.1%, 0.54 18.35%, 0.66 20.6%, 0.72 22.4%, 0.77 24.6%, 0.81 27.3%, 0.85 30.4%, 0.88 35.1%, 0.92 40.6%, 0.94 47.2%, 0.96 55%, 0.98 64%, 0.99 74.4%, 1 86.4%, 1 100%)`;
+const SNOWFLAKE_ICON = './assets/icons/snowflake-16x16.svg';
+const SNOWFLAKE_ICON_PALE = './assets/icons/snowflake-16x16-pale.svg';
 
+const pathAddition = checkIsHomePage() ? '' : '.';
+
+const relatedData = {
+  'For Work': {
+    imgSrc: `${pathAddition}./assets/img/gift-for-work.png`,
+    imgAlt: "New Year's toy - a glass marble with a gift box inside",
+    captionClass: 'text-purple',
+  },
+  'For Health': {
+    imgSrc: `${pathAddition}./assets/img/gift-for-health.png`,
+    imgAlt: "New Year's toy - a glass marble with a Snowman inside",
+    captionClass: 'text-green',
+  },
+  'For Harmony': {
+    imgSrc: `${pathAddition}./assets/img/gift-for-harmony.png`,
+    imgAlt: "New Year's toy - a glass marble with a New Year tree inside",
+    captionClass: 'text-pink',
+  },
+};
 export default class Modal {
-  pathAddition = checkIsHomePage() ? '' : '.';
-  relatedData = {
-    'For Work': {
-      imgSrc: `${this.pathAddition}./assets/img/gift-for-work.png`,
-      imgAlt: "New Year's toy - a glass marble with a gift box inside",
-      captionClass: 'text-purple',
-    },
-    'For Health': {
-      imgSrc: `${this.pathAddition}./assets/img/gift-for-health.png`,
-      imgAlt: "New Year's toy - a glass marble with a Snowman inside",
-      captionClass: 'text-green',
-    },
-    'For Harmony': {
-      imgSrc: `${this.pathAddition}./assets/img/gift-for-harmony.png`,
-      imgAlt: "New Year's toy - a glass marble with a New Year tree inside",
-      captionClass: 'text-pink',
-    },
-  };
   constructor() {
-    this.create();
-  }
-  create() {
     this.cards = document.querySelector('.cards');
     this.modal = document.querySelector('.modal');
     this.modalContainer = this.modal.querySelector('.modal__container');
@@ -36,22 +36,20 @@ export default class Modal {
     this.modalScoreLive = this.modal.querySelector('.modal__score_live');
     this.modalIconsList = [...this.modal.querySelectorAll('.modal__icons')];
 
-    this.modal.addEventListener('toggle', this.handleScroll);
+    this.modal.addEventListener('toggle', Modal.handleScroll);
   }
 
-  getStartPosition(card) {
+  static getStartAnimationPosition(card) {
     const cardRect = card.getBoundingClientRect();
+
     return {
       x: cardRect.x + cardRect.width / 2,
       y: cardRect.y + cardRect.height / 2,
     };
   }
 
-  handleModal(e) {
-    const card = e.target.closest('.card');
-    if (!card) return;
-
-    const startPosition = this.getStartPosition(card);
+  animateCard(startCard) {
+    const startPosition = Modal.getStartAnimationPosition(startCard);
 
     this.modal.animate(
       [
@@ -75,13 +73,66 @@ export default class Modal {
       }
     );
 
-    const cardName = card.dataset.cardName;
-    const cardData = gifts.find((card) => card.name === cardName);
+    function animateImage() {
+      const viewportCenter = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+      };
 
-    this.fillCardData(cardData);
+      const viewportHalfDiagonal = Math.hypot(
+        viewportCenter.x,
+        viewportCenter.y
+      );
+
+      const distanceFromStartToCenter = Math.hypot(
+        Math.abs(viewportCenter.x - startPosition.x),
+        Math.abs(viewportCenter.y - startPosition.y)
+      );
+
+      const offsetPercentage =
+        (distanceFromStartToCenter / viewportHalfDiagonal) * 100;
+
+      const keyframes = [];
+      const duration = 1000;
+      const frames = 30;
+      const damping = 3;
+      const maxAngle = 15;
+      const maxTranslateX = offsetPercentage + 30;
+
+      for (let i = 1; i <= frames; i++) {
+        const progress = i / frames;
+        const angle =
+          Math.sin(progress * Math.PI * 6) * Math.exp(-damping * progress);
+        const translateX =
+          Math.sin(progress * Math.PI * 6) *
+          maxTranslateX *
+          Math.exp(-damping * progress);
+        keyframes.push({
+          transform: `rotate(${angle * maxAngle}deg) translate(${-translateX}px)`,
+        });
+      }
+
+      this.modalImage.animate(keyframes, {
+        duration,
+        fill: 'forwards',
+      });
+    }
+
+    animateImage.call(this);
   }
 
-  handleScroll() {
+  handleModal(e) {
+    const card = e.target.closest('.card');
+    if (!card) return;
+
+    const { cardName } = card.dataset;
+    const cardData = gifts.find((cardItem) => cardItem.name === cardName);
+
+    this.fillCardData(cardData);
+    this.animateCard(card);
+  }
+
+  static handleScroll() {
     const widthBeforeToggle = document.documentElement.clientWidth;
     document.body.classList.toggle('modal-scroll-disabled');
     const widthAfterToggle = document.documentElement.clientWidth;
@@ -93,9 +144,10 @@ export default class Modal {
     this.modalImage.src = '';
     this.modalImage.alt = '';
 
-    for (let [_, data] of Object.entries(this.relatedData)) {
-      this.modalCategory.classList.remove(data.captionClass);
-    }
+    Object.values(relatedData).forEach((data) =>
+      this.modalCategory.classList.remove(data.captionClass)
+    );
+
     this.modalIconsList.forEach((items) =>
       [...items.children].forEach((item) => item.remove())
     );
@@ -105,18 +157,18 @@ export default class Modal {
     this.clearModal();
 
     this.modalImage.classList.add('modal__image');
-    this.modalImage.src = this.relatedData[cardData.category].imgSrc;
-    this.modalImage.alt = this.relatedData[cardData.category].imgAlt;
+    this.modalImage.src = relatedData[cardData.category].imgSrc;
+    this.modalImage.alt = relatedData[cardData.category].imgAlt;
 
     this.modalCategory.textContent = cardData.category;
     this.modalCategory.classList.add(
-      this.relatedData[cardData.category].captionClass
+      relatedData[cardData.category].captionClass
     );
     this.modalHeading.textContent = cardData.name;
     this.modalText.textContent = cardData.description;
     this.modalScoreLive.textContent = cardData.superpowers.live;
 
-    for (let [power, score] of Object.entries(cardData.superpowers)) {
+    Object.entries(cardData.superpowers).forEach(([power, score]) => {
       const scoreElem = this.modal.querySelector(`.modal__score_${power}`);
       scoreElem.textContent = score;
       const scoreNum = Number(cardData.superpowers[power][1]);
@@ -126,16 +178,16 @@ export default class Modal {
         const img = document.createElement('img');
 
         if (i <= scoreNum) {
-          img.src = `${this.pathAddition}./assets/icons/snowflake-16x16.svg`;
+          img.src = `${pathAddition}${SNOWFLAKE_ICON}`;
           img.alt = 'snowflake icon';
         } else {
-          img.src = `${this.pathAddition}./assets/icons/snowflake-16x16-pale.svg`;
+          img.src = `${pathAddition}${SNOWFLAKE_ICON_PALE}`;
           img.alt = 'pale snowflake icon';
         }
 
         scoreIcons.append(img);
       }
-    }
+    });
   }
 
   listen() {
