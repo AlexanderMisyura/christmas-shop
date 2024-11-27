@@ -7,6 +7,14 @@
   gap: abstract_global.rem(12px);
 }
 
+.best-gifts {
+  .cards {
+    @media (max-width: abstract_global.rem(1300px)) {
+      max-width: abstract_global.rem(700px);
+    }
+  }
+}
+
 .card {
   display: flex;
   flex-direction: column;
