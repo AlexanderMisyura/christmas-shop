@@ -50,8 +50,8 @@ export default function processSidebar() {
     } else {
       closeSidebar();
       setTimeout(() => {
-        location.href = link.href;
-      }, 200);
+        window.location.href = link.href;
+      }, 250);
     }
   }
 
