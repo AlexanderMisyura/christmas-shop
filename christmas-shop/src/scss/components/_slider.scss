@@ -55,17 +55,13 @@
     &.slider-row__btn_edge {
       cursor: default;
       border-color: abstract_global.$clr-static-white-40;
-      path {
-        stroke-opacity: 0.4;
-      }
+      color: abstract_global.$clr-static-white-40;
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover:not(.slider-row__btn_edge) {
         background-color: abstract_global.$clr-static-white;
-        path {
-          stroke: abstract_global.$clr-primary;
-        }
+        color: abstract_global.$clr-primary;
       }
     }
   }

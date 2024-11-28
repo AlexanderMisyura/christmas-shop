@@ -39,8 +39,8 @@
     padding: 0;
 
     @media (hover: hover) and (pointer: fine) {
-      &:hover path {
-        stroke: abstract_global.$clr-primary;
+      &:hover {
+        color: abstract_global.$clr-primary;
       }
     }
   }

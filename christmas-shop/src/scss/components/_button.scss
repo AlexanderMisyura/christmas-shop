@@ -8,14 +8,6 @@
   transition: abstract_global.$transition;
   background-color: transparent;
 
-  & *,
-  &::before,
-  &::after,
-  & *::before,
-  & *::after {
-    transition: abstract_global.$transition;
-  }
-
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       cursor: pointer;
