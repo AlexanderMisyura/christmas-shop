@@ -1,13 +1,15 @@
+import { checkIsHomePage } from "./utils";
+
 export default class CardGenerator {
   card;
-  constructor(params) {
-    this.generateCard(params);
+  constructor(params, modal) {
+    this.generateCard(params, modal);
   }
 
-  generateCard(params) {
+  generateCard(params, modal) {
     const { name, category } = params;
 
-    const pathAddition = window.location.href.includes('/gifts/') ? '.' : '';
+    const pathAddition = checkIsHomePage() ? '' : '.';
 
     const relatedData = {
       'For Work': {
@@ -29,6 +31,8 @@ export default class CardGenerator {
 
     this.card = document.createElement('button');
     this.card.classList.add('card');
+    this.card.popoverTargetElement = modal;
+    this.card.dataset.cardName = name;
 
     const cardImg = document.createElement('img');
     cardImg.classList.add('card__img');

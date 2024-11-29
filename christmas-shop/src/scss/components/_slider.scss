@@ -2,13 +2,10 @@
 
 .slider {
   &__wrapper {
-    background-image: url(./assets/img/bg-snow.png);
     background-color: abstract_global.$clr-primary;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
     overflow: hidden;
   }
+
   &__container {
     flex-direction: column;
     gap: abstract_global.rem(20px);
@@ -31,6 +28,8 @@
   &__content {
     display: flex;
     gap: abstract_global.rem(20px);
+    position: relative;
+    right: 0;
   }
 
   &__text {
@@ -56,17 +55,13 @@
     &.slider-row__btn_edge {
       cursor: default;
       border-color: abstract_global.$clr-static-white-40;
-      path {
-        stroke-opacity: 0.4;
-      }
+      color: abstract_global.$clr-static-white-40;
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover:not(.slider-row__btn_edge) {
         background-color: abstract_global.$clr-static-white;
-        path {
-          stroke: abstract_global.$clr-primary;
-        }
+        color: abstract_global.$clr-primary;
       }
     }
   }

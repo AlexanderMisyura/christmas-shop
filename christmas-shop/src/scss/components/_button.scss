@@ -8,15 +8,6 @@
   transition: abstract_global.$transition;
   background-color: transparent;
 
-  & *,
-  &::before,
-  &::after,
-  & *::before,
-  & *::after {
-    transition: abstract_global.$transition;
-    flex-shrink: 0;
-  }
-
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       cursor: pointer;
@@ -53,14 +44,7 @@
 
   &_burger {
     @extend %base-btn;
-    display: none;
     border-radius: 0;
-
-    @media (max-width: abstract_global.$tablet-breakpoint) {
-      & {
-        display: flex;
-      }
-    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover .btn_burger__burger::before,
@@ -79,47 +63,239 @@
         content: '';
         position: absolute;
         background-color: abstract_global.$clr-dark;
+        width: abstract_global.rem(20px);
+        height: abstract_global.rem(1px);
+        transition:
+          transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28),
+          background-color 0.3s ease-in;
       }
 
-      &_default {
-        &::before,
-        &::after {
-          width: abstract_global.rem(20px);
-          height: abstract_global.rem(1px);
-        }
-
-        &::before {
-          top: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        &::after {
-          bottom: 15px;
-          left: 50%;
-          transform: translateX(-50%);
-        }
+      &::before {
+        top: 15px;
+        left: 50%;
+        transform: translateX(-50%);
       }
 
-      &_cross {
-        &::before,
-        &::after {
-          width: abstract_global.rem(20px);
-          height: abstract_global.rem(1px);
-        }
+      &::after {
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
 
-        &::before {
-          top: 20px;
-          left: 50%;
-          transform: translateX(-50%) rotate(45deg);
-        }
+    &_active {
+      & > .btn_burger__burger::before {
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%) rotate(135deg);
+      }
 
-        &::after {
-          bottom: 19px;
-          left: 50%;
-          transform: translateX(-50%) rotate(-45deg);
+      & > .btn_burger__burger::after {
+        bottom: 19px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-135deg);
+      }
+    }
+  }
+
+  &_up {
+    @extend %base-btn;
+    display: none;
+    position: fixed;
+    right: abstract_global.rem(8px);
+    bottom: abstract_global.rem(8px);
+    width: abstract_global.rem(56px);
+    aspect-ratio: 1;
+    border: 1px solid abstract_global.$clr-primary;
+    border-radius: 100%;
+    background-color: abstract_global.$clr-static-white;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        svg {
+          animation: scale-arrow 0.5s linear alternate infinite;
         }
+      }
+    }
+
+    @media (max-width: abstract_global.$tablet-breakpoint) {
+      &_shown {
+        display: flex;
+        animation:
+          drop-btn_up-in 0.5s // #region linear(...
+          linear(
+              0 0%,
+              0 2.27%,
+              0.02 4.53%,
+              0.04 6.8%,
+              0.06 9.07%,
+              0.1 11.33%,
+              0.14 13.6%,
+              0.25 18.15%,
+              0.39 22.7%,
+              0.56 27.25%,
+              0.77 31.8%,
+              1 36.35%,
+              0.89 40.9%,
+              0.85 43.18%,
+              0.81 45.45%,
+              0.79 47.72%,
+              0.77 50%,
+              0.75 52.27%,
+              0.75 54.55%,
+              0.75 56.82%,
+              0.77 59.1%,
+              0.79 61.38%,
+              0.81 63.65%,
+              0.85 65.93%,
+              0.89 68.2%,
+              1 72.7%,
+              0.97 74.98%,
+              0.95 77.25%,
+              0.94 79.53%,
+              0.94 81.8%,
+              0.94 84.08%,
+              0.95 86.35%,
+              0.97 88.63%,
+              1 90.9%,
+              0.99 93.18%,
+              0.98 95.45%,
+              0.99 97.73%,
+              1 100%
+            ),
+          // #endregion
+          scale-btn_up-in 0.5s // #region linear(...
+          linear(
+              0 0%,
+              0 2.27%,
+              0.02 4.53%,
+              0.04 6.8%,
+              0.06 9.07%,
+              0.1 11.33%,
+              0.14 13.6%,
+              0.25 18.15%,
+              0.39 22.7%,
+              0.56 27.25%,
+              0.77 31.8%,
+              1 36.35%,
+              0.89 40.9%,
+              0.85 43.18%,
+              0.81 45.45%,
+              0.79 47.72%,
+              0.77 50%,
+              0.75 52.27%,
+              0.75 54.55%,
+              0.75 56.82%,
+              0.77 59.1%,
+              0.79 61.38%,
+              0.81 63.65%,
+              0.85 65.93%,
+              0.89 68.2%,
+              1 72.7%,
+              0.97 74.98%,
+              0.95 77.25%,
+              0.94 79.53%,
+              0.94 81.8%,
+              0.94 84.08%,
+              0.95 86.35%,
+              0.97 88.63%,
+              1 90.9%,
+              0.99 93.18%,
+              0.98 95.45%,
+              0.99 97.73%,
+              1 100%
+            );
+        // #endregion;
+      }
+
+      &_disabled {
+        animation:
+          drop-btn_up-out 0.5s // #region linear(...
+          linear(
+              0 0%,
+              0 2.27%,
+              0.02 4.53%,
+              0.04 6.8%,
+              0.06 9.07%,
+              0.1 11.33%,
+              0.14 13.6%,
+              0.25 18.15%,
+              0.39 22.7%,
+              0.56 27.25%,
+              0.77 31.8%,
+              1 36.35%,
+              0.89 40.9%,
+              0.85 43.18%,
+              0.81 45.45%,
+              0.79 47.72%,
+              0.77 50%,
+              0.75 52.27%,
+              0.75 54.55%,
+              0.75 56.82%,
+              0.77 59.1%,
+              0.79 61.38%,
+              0.81 63.65%,
+              0.85 65.93%,
+              0.89 68.2%,
+              1 72.7%,
+              0.97 74.98%,
+              0.95 77.25%,
+              0.94 79.53%,
+              0.94 81.8%,
+              0.94 84.08%,
+              0.95 86.35%,
+              0.97 88.63%,
+              1 90.9%,
+              0.99 93.18%,
+              0.98 95.45%,
+              0.99 97.73%,
+              1 100%
+            ),
+          // #endregion;
+          scale-btn_up-out 0.5s // #region linear(...
+          linear(
+              0 0%,
+              0 2.27%,
+              0.02 4.53%,
+              0.04 6.8%,
+              0.06 9.07%,
+              0.1 11.33%,
+              0.14 13.6%,
+              0.25 18.15%,
+              0.39 22.7%,
+              0.56 27.25%,
+              0.77 31.8%,
+              1 36.35%,
+              0.89 40.9%,
+              0.85 43.18%,
+              0.81 45.45%,
+              0.79 47.72%,
+              0.77 50%,
+              0.75 52.27%,
+              0.75 54.55%,
+              0.75 56.82%,
+              0.77 59.1%,
+              0.79 61.38%,
+              0.81 63.65%,
+              0.85 65.93%,
+              0.89 68.2%,
+              1 72.7%,
+              0.97 74.98%,
+              0.95 77.25%,
+              0.94 79.53%,
+              0.94 81.8%,
+              0.94 84.08%,
+              0.95 86.35%,
+              0.97 88.63%,
+              1 90.9%,
+              0.99 93.18%,
+              0.98 95.45%,
+              0.99 97.73%,
+              1 100%
+            );
+        // #endregion;
       }
     }
   }
 }
+//

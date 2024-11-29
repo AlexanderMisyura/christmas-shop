@@ -2,12 +2,7 @@
 
 .best-gifts {
   &__wrapper {
-    background-image: url(./assets/img/bg-snow.png);
-    background-color: #ff4646;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    overflow: hidden;
+    background-color: abstract_global.$clr-primary;
   }
 
   &__container {
@@ -20,7 +15,7 @@
   &__text {
     display: flex;
     flex-direction: column;
-    gap: abstract_global.rem(12px);
+    gap: abstract_global.rem(11px);
     color: abstract_global.$clr-static-white;
   }
 }

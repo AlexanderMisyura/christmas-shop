@@ -33,7 +33,7 @@
       &:hover {
         cursor: pointer;
 
-        .footer__link,
+        .footer__action,
         .footer__heading {
           color: abstract_global.$clr-primary;
         }
@@ -58,23 +58,15 @@
     padding: abstract_global.rem(8px);
     transition: abstract_global.$transition;
 
-    & * {
-      transition: abstract_global.$transition;
-    }
-
     @media (hover: hover) and (pointer: fine) {
-      &:hover path {
-        stroke: abstract_global.$clr-primary;
+      &:hover {
+        color: abstract_global.$clr-primary;
       }
     }
   }
 
   &__link {
     transition: abstract_global.$transition;
-
-    & * {
-      transition: abstract_global.$transition;
-    }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
