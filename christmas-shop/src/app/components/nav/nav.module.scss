@@ -1,0 +1,39 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.nav {
+  &__link-list {
+    display: flex;
+    gap: rem(8px);
+
+    @media (max-width: $tablet-breakpoint) {
+      & {
+        display: none;
+      }
+    }
+  }
+
+  &__link {
+    &.nav__link_active {
+      cursor: default;
+      color: $clr-primary;
+      background-color: $clr-primary-10;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover:not(.nav__link_active) {
+        color: $clr-primary;
+        background-color: $clr-primary-10;
+      }
+    }
+  }
+
+  &__burger {
+    display: none;
+
+    @media (max-width: $tablet-breakpoint) {
+      & {
+        display: flex;
+      }
+    }
+  }
+}
