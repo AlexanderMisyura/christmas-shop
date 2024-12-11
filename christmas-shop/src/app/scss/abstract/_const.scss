@@ -1,0 +1,24 @@
+// -----COLOR-----
+$clr-primary: rgb(255 70 70);
+$clr-primary-10: rgb(255 70 70 / 10%);
+$clr-dark: rgb(24 28 41);
+$clr-static-white: rgb(255 255 255);
+$clr-static-white-40: rgb(255 255 255 / 40%);
+$clr-static-white-20: rgb(255 255 255 / 20%);
+$clr-tag-purple: rgb(67 97 255);
+$clr-tag-pink: rgb(255 67 247);
+$clr-tag-green: rgb(6 164 79);
+$clr-content-background: rgb(236 243 248);
+$clr-backdrop: rgb(24 28 41 / 80%);
+
+// -----WIDTHS AND BREAKPOINTS-----
+$desktop-max-width: 1440px;
+$desktop-max-container-width: 1276px;
+$modal-max-width: 400px;
+$tablet-breakpoint: 768px;
+$mobile-breakpoint: 600px;
+
+// -----OTHER-----
+$border-rad-l: 20px;
+$border-rad-s: 12px;
+$transition: all 0.3s ease-in;

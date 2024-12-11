@@ -3,9 +3,9 @@
 *,
 *::before,
 *::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 ul {
@@ -13,14 +13,14 @@ ul {
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
 button {
   font: inherit;
-  background-color: inherit;
   color: inherit;
+  background-color: inherit;
   border: none;
 }
 
@@ -31,7 +31,8 @@ html {
 body {
   display: flex;
   flex-direction: column;
-  font-family: 'Montserrat', sans-serif;
+
+  font-family: Montserrat, sans-serif;
   font-weight: 400;
   color: abstract_global.$clr-dark;
 }
@@ -59,17 +60,20 @@ body {
   line-height: 150%;
   letter-spacing: 0.18em;
 }
+
 .heading-2,
 .action-large {
   font-size: abstract_global.rem(24px);
   line-height: 152%;
   letter-spacing: 0.16em;
 }
+
 .heading-3 {
   font-size: abstract_global.rem(16px);
   line-height: 152%;
   letter-spacing: 0.08em;
 }
+
 .heading-4,
 .action-small {
   font-size: abstract_global.rem(12px);
@@ -84,7 +88,7 @@ body {
 }
 
 .caption {
-  font-family: 'Allura', cursive;
+  font-family: Allura, cursive;
   font-size: abstract_global.rem(24px);
   font-weight: 400;
   line-height: 100%;
@@ -96,6 +100,39 @@ body {
   letter-spacing: 0.3px;
 }
 
+// -----SCROLL-----
+
+@media (max-width: abstract_global.$tablet-breakpoint) {
+  .scroll-disabled {
+    overflow: hidden;
+  }
+
+  .preserve-scroll-space {
+    scrollbar-gutter: stable;
+  }
+}
+
+.modal-scroll-disabled {
+  overflow: hidden;
+}
+
+// -----ICONS-----
+
+.icon-small {
+  width: abstract_global.rem(16px);
+  height: abstract_global.rem(16px);
+}
+
+.icon-medium {
+  width: abstract_global.rem(24px);
+  height: abstract_global.rem(24px);
+}
+
+.icon-large {
+  width: abstract_global.rem(80px);
+  height: abstract_global.rem(80px);
+}
+
 // -----OTHER-----
 
 .inner-block {
@@ -105,19 +142,11 @@ body {
 .text-purple {
   color: abstract_global.$clr-tag-purple;
 }
+
 .text-pink {
   color: abstract_global.$clr-tag-pink;
 }
+
 .text-green {
   color: abstract_global.$clr-tag-green;
-}
-
-@media (max-width: abstract_global.$tablet-breakpoint) {
-  .scroll-disabled {
-    overflow: hidden;
-  }
-}
-
-.modal-scroll-disabled {
-  overflow: hidden;
 }
