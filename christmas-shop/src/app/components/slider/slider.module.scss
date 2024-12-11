@@ -1,67 +1,69 @@
-@use '../abstract/abstract_global';
+@use '../../scss/abstract/abstract_global' as *;
 
 .slider {
   &__wrapper {
-    background-color: abstract_global.$clr-primary;
     overflow: hidden;
+    background-color: $clr-primary;
   }
 
   &__container {
     flex-direction: column;
-    gap: abstract_global.rem(20px);
-    color: abstract_global.$clr-static-white;
+    gap: rem(20px);
+    color: $clr-static-white;
   }
 
   &__text {
     display: flex;
     flex-direction: column;
+    gap: rem(12px);
     align-items: center;
-    gap: abstract_global.rem(12px);
   }
 }
 
 .slider-row {
   display: flex;
   flex-direction: column;
-  gap: abstract_global.rem(20px);
+  gap: rem(20px);
 
   &__content {
-    display: flex;
-    gap: abstract_global.rem(20px);
     position: relative;
-    right: 0;
+    // right: 0;
+    transform: translateX(0);
+    display: flex;
+    gap: rem(20px);
   }
 
   &__text {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
   &__image {
     display: inline-block;
-    border-radius: abstract_global.$border-rad-l;
-    width: abstract_global.rem(200px);
     aspect-ratio: 1;
+    width: rem(200px);
+    border-radius: $border-rad-l;
   }
 
   &__buttons-block {
     display: flex;
+    gap: rem(20px);
     justify-content: flex-end;
-    gap: abstract_global.rem(20px);
   }
 
   &__btn {
+    /* stylelint-disable-next-line selector-class-pattern */
     &.slider-row__btn_edge {
       cursor: default;
-      border-color: abstract_global.$clr-static-white-40;
-      color: abstract_global.$clr-static-white-40;
+      color: $clr-static-white-40;
+      border-color: $clr-static-white-40;
     }
 
     @media (hover: hover) and (pointer: fine) {
       &:hover:not(.slider-row__btn_edge) {
-        background-color: abstract_global.$clr-static-white;
-        color: abstract_global.$clr-primary;
+        color: $clr-primary;
+        background-color: $clr-static-white;
       }
     }
   }
