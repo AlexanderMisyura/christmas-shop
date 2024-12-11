@@ -1,0 +1,30 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.hero {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: $clr-primary;
+    background-image: url('../../assets/img/bg-ball.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-top-left-radius: $border-rad-l;
+    border-top-right-radius: $border-rad-l;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12px);
+    align-items: center;
+    justify-content: center;
+
+    padding: rem(60px) 0;
+
+    color: $clr-static-white;
+    text-align: center;
+  }
+}

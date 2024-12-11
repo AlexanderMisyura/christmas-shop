@@ -1,0 +1,63 @@
+@keyframes snowfall-top {
+  0% {
+    top: -100%;
+    left: 50%;
+    transform: scale(0.5) rotate(-15deg);
+  }
+
+  100% {
+    top: 0;
+    left: 0;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes snowfall-bottom {
+  0% {
+    top: 0;
+    left: 0;
+    transform: scale(1) rotate(0);
+  }
+
+  100% {
+    top: 100%;
+    left: -50%;
+    transform: scale(1.5) rotate(25deg);
+  }
+}
+
+.snowfall {
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: -100%;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-image: url('../../assets/img/bg-snow.png');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
+    border-bottom-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+
+    animation: snowfall-top 3s infinite linear;
+  }
+
+  &::after {
+    top: 0;
+    animation: snowfall-bottom 3s infinite linear;
+  }
+
+  &__wrapper {
+    position: relative;
+    z-index: 1;
+  }
+}
