@@ -1,15 +1,28 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ESLintPlugin from 'eslint-webpack-plugin';
+import pkg from 'webpack';
 
-module.exports = ({ development }) => ({
+const { ProgressPlugin } = pkg;
+
+const devPlugins = (isDev) =>
+  isDev ? [new ProgressPlugin()] : [new ESLintPlugin({ extensions: ['js'] })];
+
+// const esLintPlugin = (isDevelopment) =>
+//   isDevelopment ? [] : [new ESLintPlugin({ extensions: ['js'] })];
+
+export default ({ development }) => ({
   mode: development ? 'development' : 'production',
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true,
+  },
   entry: './src/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(process.cwd(), 'dist'),
     filename: '[name].[contenthash].js',
+    assetModuleFilename: 'assets/[name][ext][query]',
     clean: true,
   },
   optimization: {
@@ -18,46 +31,72 @@ module.exports = ({ development }) => ({
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/img/[hash][ext][query]',
+        },
+      },
+      {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+      },
+      {
+        test: /\.(woff(2)?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: 'assets/fonts/[hash][ext][query]',
+        },
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        exclude: /\.module\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { url: false },
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: { sourceMap: true },
           },
         ],
       },
       {
-        test: /\.scss$/i,
+        test: /\.module\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { url: false },
+            options: {
+              sourceMap: true,
+              modules: {
+                exportLocalsConvention: 'camel-case-only',
+                localIdentName: development
+                  ? '[local]_[hash:base64:8]'
+                  : '[hash:base64:8]',
+              },
+            },
           },
-          'sass-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
         ],
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/pages/index.html',
-      filename: 'index.html',
-      favicon: path.resolve(__dirname, 'src/assets/icons/favicon.ico'),
-      minify: false,
-    }),
-    new HtmlWebpackPlugin({
-      template: './src/pages/gifts/index.html',
-      filename: 'gifts/index.html',
-      favicon: path.resolve(__dirname, 'src/assets/icons/favicon.ico'),
-      minify: false,
+      title: 'Christmas Shop',
+      favicon: path.resolve(process.cwd(), 'src/app/assets/icons/favicon.ico'),
     }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-    new CopyPlugin({
-      patterns: [
-        { from: path.resolve(__dirname, './src/assets'), to: 'assets' },
-      ],
-    }),
+    ...devPlugins(development),
   ],
 });

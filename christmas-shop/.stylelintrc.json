@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "stylelint-config-standard-scss",
+    "stylelint-config-clean-order",
+    "stylelint-config-css-modules"
+  ]
+}
