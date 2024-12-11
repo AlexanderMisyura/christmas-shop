@@ -1,0 +1,25 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.header {
+  &__wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  &__container {
+    gap: rem(12px);
+    justify-content: space-between;
+    padding: rem(12px) 0;
+  }
+
+  &__nav {
+    display: flex;
+  }
+
+  &__logo {
+    display: flex;
+    gap: rem(8px);
+    align-items: center;
+    padding: rem(8px) rem(20px);
+  }
+}
