@@ -1,0 +1,56 @@
+@use '../../scss/abstract/abstract_global.scss' as *;
+
+
+.about {
+  &__wrapper {
+    background-color: $clr-primary;
+  }
+
+  &__container {
+    background-color: $clr-static-white;
+    border-radius: $border-rad-l;
+
+    @media (max-width: $mobile-breakpoint) {
+      flex-direction: column;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    padding: 0 rem(60px);
+
+    :global(.caption) {
+      color: $clr-primary;
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      width: 100%;
+      padding-right: rem(20px);
+      padding-left: rem(20px);
+    }
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20px);
+    padding: rem(60px) 0;
+  }
+
+  &__image-container {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 50%;
+
+    border-radius: $border-rad-l;
+
+    @media (max-width: $mobile-breakpoint) {
+      width: 100%;
+    }
+  }
+}
