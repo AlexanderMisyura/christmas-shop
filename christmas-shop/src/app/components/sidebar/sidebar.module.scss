@@ -1,0 +1,72 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.sidebar {
+  position: absolute;
+  z-index: 2;
+  top: rem(63px);
+  right: 0;
+
+  overflow: hidden;
+  display: none;
+
+  width: 0;
+  height: calc(100dvh - rem(64px) + 1px);
+
+  opacity: 0;
+  background-color: $clr-static-white;
+
+  transition:
+    width 0.2s ease-in,
+    opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &__link {
+    color: $clr-static-white;
+
+    &_active {
+      color: $clr-static-white;
+      background-color: $clr-static-white;
+    }
+  }
+
+  &_active {
+    width: 100%;
+    opacity: 1;
+    transition:
+      width 0.2s ease-in,
+      opacity 0.4s cubic-bezier(0.4, 0, 1, 1);
+
+    .sidebar__link {
+      color: inherit;
+
+      &_active {
+        color: $clr-primary;
+        background-color: $clr-primary-10;
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover:not(.sidebar__link_active) {
+          color: $clr-primary;
+          background-color: $clr-primary-10;
+        }
+
+        &_active:hover {
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  &__link-list {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8px);
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+  }
+
+  @media (max-width: $tablet-breakpoint) {
+    display: flex;
+  }
+}
