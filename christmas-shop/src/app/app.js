@@ -1,5 +1,6 @@
 import State from './state.js';
 import Router from './router.js';
+import Page from './components/page.js';
 
 const ROUTES = [{ pathname: '/' }, { pathname: '/gifts' }];
 
@@ -23,9 +24,14 @@ export default class App {
           }),
       }))
     );
+
+    this.page = new Page(
+      { callbacks: { linkHandler: this.router.handleLink } },
+      this.state
+    );
   }
 
   run() {
-    // start the app
+    this.page.mount();
   }
 }
