@@ -16,8 +16,8 @@ export default class Sidebar extends BaseComponent {
   linkElements = {};
 
   /**
-   * @param {Props} [props]
-   * @param {State} [state]
+   * @param {Props} props
+   * @param {State} state
    */
   constructor(props, state) {
     super({ elementTagName: 'aside', classList: styles.sidebar }, [], state);
@@ -49,6 +49,11 @@ export default class Sidebar extends BaseComponent {
     });
 
     if (this.state) {
+      this.currentState = {
+        currentPage: this.state.stateObj.currentPage,
+        isSidebarOpen: this.state.stateObj.isSidebarOpen,
+      };
+
       this.subscribe(this.state, [
         this.updateSidebarActiveLink.bind(this),
         this.updateSidebarToggle.bind(this),
@@ -64,14 +69,17 @@ export default class Sidebar extends BaseComponent {
    * @returns {void}
    */
   updateSidebarActiveLink(stateObj) {
-    const { currentPage } = stateObj;
+    if (this.currentState.currentPage === stateObj.currentPage) return;
+
     const giftsLink = this.linkElements.gifts;
 
-    if (currentPage === '/gifts') {
+    if (stateObj.currentPage === '/gifts') {
       giftsLink.addClasses(styles.sidebarLinkActive);
-    } else if (currentPage === '/') {
+    } else if (stateObj.currentPage === '/') {
       giftsLink.removeClasses(styles.sidebarLinkActive);
     }
+
+    this.currentState.currentPage = stateObj.currentPage;
   }
 
   /**
@@ -80,6 +88,8 @@ export default class Sidebar extends BaseComponent {
    * @returns {void}
    */
   updateSidebarToggle(stateObj) {
+    if (this.currentState.isSidebarOpen === stateObj.isSidebarOpen) return;
+
     if (stateObj.isSidebarOpen) {
       this.addClasses(styles.sidebarActive);
       window.scrollTo(0, 0);
@@ -90,5 +100,7 @@ export default class Sidebar extends BaseComponent {
       document.body.classList.remove('scroll-disabled');
       document.documentElement.classList.remove('preserve-scroll-space');
     }
+
+    this.currentState.isSidebarOpen = stateObj.isSidebarOpen;
   }
 }

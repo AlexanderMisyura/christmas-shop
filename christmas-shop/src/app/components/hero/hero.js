@@ -6,11 +6,10 @@ import * as animatedBg from '../snowfall/snowfall.module.scss';
 
 export default class Hero extends BaseComponent {
   /**
-   * @param {Props} [props]
-   * @param {State} [state]
+   * @param {Props} props
    */
-  constructor(props, state) {
-    super({ elementTagName: 'section' }, [], state);
+  constructor(props) {
+    super({ elementTagName: 'section' }, []);
 
     const wrapper = tag.div({
       classList: [styles.heroWrapper, 'wrapper', animatedBg.snowfall],

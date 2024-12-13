@@ -18,9 +18,15 @@ export default class BaseComponent {
 
   /**
    * App's state.
-   * @type {State | null} - An instance of the State class.
+   * @type {State} - An instance of the State class.
    */
   state;
+
+  /**
+   * Current values of component-relevant state data.
+   * @type {PartialStateObj}
+   */
+  currentState;
 
   /**
    * Creates a new Base component.
@@ -45,8 +51,6 @@ export default class BaseComponent {
 
     if (state) {
       this.state = state;
-    } else {
-      this.state = null;
     }
   }
 

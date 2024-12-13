@@ -9,7 +9,7 @@ import svgChunkTemplate from '../svgChunkTemplate.js';
 
 export default class Header extends BaseComponent {
   /**
-   * @param {Props} [props]
+   * @param {Props} props
    * @param {State} [state]
    */
   constructor(props, state) {

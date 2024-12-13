@@ -47,6 +47,7 @@ const sliderContent = [
  */
 
 export default class Slider extends BaseComponent {
+  // #region properties
   /** @type {BaseComponent} */
   slider;
 
@@ -70,12 +71,12 @@ export default class Slider extends BaseComponent {
 
   /** @type {number} */
   stepWidth;
+  // #endregion
 
   /**
-   * @param {Props} [props]
-   * @param {State} [state]
+   * @param {State} state
    */
-  constructor(props, state) {
+  constructor(state) {
     super({ elementTagName: 'section' }, [], state);
 
     this.createSliderElement();
@@ -85,7 +86,7 @@ export default class Slider extends BaseComponent {
     this.currentWidth = this.slider.element.clientWidth;
     this.maxOffset = this.maxWidth - this.currentWidth;
     this.currentOffset = START_POSITION;
-    this.stepNumber = /** @type {Number} */ (this.state?.stateObj.sliderSteps);
+    this.stepNumber = this.state.stateObj.sliderSteps;
     this.stepWidth = Math.ceil(this.maxOffset / this.stepNumber);
 
     if (this.state) {
