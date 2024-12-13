@@ -4,7 +4,7 @@ import Nav from '../nav/nav.js';
 
 import * as styles from './header.module.scss';
 
-import snowflake from './snowflake.svg';
+import snowflake from './icons/snowflake.svg';
 import svgChunkTemplate from '../svgChunkTemplate.js';
 
 export default class Header extends BaseComponent {
