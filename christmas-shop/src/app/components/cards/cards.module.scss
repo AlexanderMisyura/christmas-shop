@@ -1,0 +1,8 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: rem(12px);
+  justify-content: center;
+}

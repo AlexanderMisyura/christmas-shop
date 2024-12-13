@@ -6,6 +6,8 @@ import Hero from './hero/hero.js';
 import Sidebar from './sidebar/sidebar.js';
 import About from './about/about.js';
 import Slider from './slider/slider.js';
+import BestGifts from './bestGifts/bestGifts.js';
+import Gifts from './gifts/gifts.js';
 
 const TABLET_WIDTH = 768;
 const DESKTOP_BREAKPOINT = `(width > ${TABLET_WIDTH}px)`;
@@ -21,6 +23,9 @@ export default class Page extends BaseComponent {
   /** @type {BaseComponent} */
   homePage;
 
+  /** @type {BaseComponent} */
+  giftsPage;
+
   /** @type {Header} */
   header;
 
@@ -35,6 +40,12 @@ export default class Page extends BaseComponent {
 
   /** @type {Slider} */
   slider;
+
+  /** @type {BestGifts} */
+  bestGifts;
+
+  /** @type {Gifts} */
+  gifts;
   // #endregion
 
   /**
@@ -49,14 +60,16 @@ export default class Page extends BaseComponent {
     this.hero = new Hero(props);
     this.about = new About();
     this.slider = new Slider(state);
+    this.gifts = new Gifts(state);
+    this.bestGifts = new BestGifts(state);
 
     this.homePage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
-      [this.hero, this.about, this.slider]
+      [this.hero, this.about, this.slider, this.bestGifts]
     );
     this.giftsPage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
-      []
+      [this.gifts]
     );
 
     this.main = this.homePage.element;
@@ -91,14 +104,25 @@ export default class Page extends BaseComponent {
       default:
         break;
     }
+    window.scrollTo(0, 0);
+
     this.currentState.currentPage = stateObj.currentPage;
   }
 
+  /**
+   * Switches main content of the page.
+   * @param {HTMLElement} newPageElement
+   * @returns {void}
+   */
   replaceCurrentPage(newPageElement) {
     this.main.replaceWith(newPageElement);
     this.main = newPageElement;
   }
 
+  /**
+   * Mounts page content to the document and makes initial setup.
+   * @returns {void}
+   */
   mount() {
     document.body.append(this.getElement());
 
@@ -109,6 +133,10 @@ export default class Page extends BaseComponent {
     this.updateState({ sliderSteps: initialSliderSteps });
   }
 
+  /**
+   * Adds event listeners.
+   * @returns {void}
+   */
   listen() {
     const desktopMediaQuery = window.matchMedia(DESKTOP_BREAKPOINT);
     desktopMediaQuery.addEventListener('change', (e) => {

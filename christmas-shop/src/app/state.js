@@ -1,10 +1,16 @@
+/// <reference path="./types.js" />
+
 /** @type {StateObj} */
 const defaultState = {
   isSidebarOpen: false,
   sliderSteps: 3,
   currentPage: '/',
   gifts: [],
+  activeCategory: 'All',
 };
+
+const CARDS_DATA_URL =
+  'https://raw.githubusercontent.com/rolling-scopes-school/tasks/refs/heads/master/tasks/christmas-shop/gifts.json';
 
 export default class State {
   /** @type {StateObj} */
@@ -19,6 +25,8 @@ export default class State {
   constructor() {
     this.stateObj = defaultState;
     this.subscribers = [];
+
+    this.getCards(CARDS_DATA_URL);
   }
 
   /**
@@ -67,5 +75,17 @@ export default class State {
       this.stateObj = { ...this.stateObj, ...newState };
       this.notify();
     }
+  }
+
+  /**
+   * Fetches cards data and updates the state object with it.
+   * @param {string} url
+   * @returns {Promise<void>}
+   */
+  async getCards(url) {
+    const result = await fetch(url);
+    const cardsArray = await result.json();
+
+    this.updateState({ gifts: cardsArray });
   }
 }

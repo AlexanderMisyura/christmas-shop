@@ -1,0 +1,27 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.best-gifts {
+  &__wrapper {
+    background-color: $clr-primary;
+  }
+
+  &__container {
+    flex-direction: column;
+    gap: rem(20px);
+    align-items: center;
+    text-align: center;
+  }
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    gap: rem(11px);
+    color: $clr-static-white;
+  }
+
+  &__cards {
+    @media (width <= rem(1310px)) {
+      max-width: rem(700px);
+    }
+  }
+}

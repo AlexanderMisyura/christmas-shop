@@ -1,25 +1,5 @@
 @use '../abstract/abstract_global';
 
-@keyframes scale-card-image {
-  0% {
-    scale: 0.7;
-  }
-
-  100% {
-    opacity: 1;
-  }
-}
-
-@keyframes highlight-card-image {
-  0% {
-    filter: sepia(100%);
-  }
-
-  100% {
-    filter: sepia(0%);
-  }
-}
-
 @keyframes drop-btn_up-in {
   0% {
     right: abstract_global.rem(-56px);

@@ -1,12 +1,14 @@
 @use '../abstract/abstract_global';
 
 %base-btn {
-  border-radius: abstract_global.$border-rad-s;
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: abstract_global.$transition;
+  justify-content: center;
+
   background-color: transparent;
+  border-radius: abstract_global.$border-rad-s;
+
+  transition: abstract_global.$transition;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -17,14 +19,16 @@
 
 .btn {
   @extend %base-btn;
+
   padding: abstract_global.rem(12px) abstract_global.rem(20px);
 
   &_large {
     @extend %base-btn;
-    border-radius: abstract_global.$border-rad-l;
+
     padding: abstract_global.rem(20px) abstract_global.rem(32px);
     color: abstract_global.$clr-static-white;
     background-color: abstract_global.$clr-dark;
+    border-radius: abstract_global.$border-rad-l;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -36,35 +40,34 @@
 
   &_icon {
     @extend %base-btn;
-    width: abstract_global.rem(56px);
+
     aspect-ratio: 1;
+    width: abstract_global.rem(56px);
     border: 1px solid abstract_global.$clr-static-white;
     border-radius: abstract_global.$border-rad-l;
   }
 
   &_burger {
     @extend %base-btn;
-    border-radius: 0;
 
-    @media (hover: hover) and (pointer: fine) {
-      &:hover .btn_burger__burger::before,
-      &:hover .btn_burger__burger::after {
-        background-color: abstract_global.$clr-primary;
-      }
-    }
+    border-radius: 0;
 
     &__burger {
       position: relative;
-      height: abstract_global.rem(40px);
       width: abstract_global.rem(40px);
+      height: abstract_global.rem(40px);
 
       &::before,
       &::after {
         content: '';
+
         position: absolute;
-        background-color: abstract_global.$clr-dark;
+
         width: abstract_global.rem(20px);
         height: abstract_global.rem(1px);
+
+        background-color: abstract_global.$clr-dark;
+
         transition:
           transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28),
           background-color 0.3s ease-in;
@@ -96,19 +99,30 @@
         transform: translateX(-50%) rotate(-135deg);
       }
     }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover .btn_burger__burger::before,
+      &:hover .btn_burger__burger::after {
+        background-color: abstract_global.$clr-primary;
+      }
+    }
   }
 
   &_up {
     @extend %base-btn;
-    display: none;
+
     position: fixed;
     right: abstract_global.rem(8px);
     bottom: abstract_global.rem(8px);
-    width: abstract_global.rem(56px);
+
+    display: none;
+
     aspect-ratio: 1;
+    width: abstract_global.rem(56px);
+
+    background-color: abstract_global.$clr-static-white;
     border: 1px solid abstract_global.$clr-primary;
     border-radius: 100%;
-    background-color: abstract_global.$clr-static-white;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
@@ -205,6 +219,7 @@
               0.99 97.73%,
               1 100%
             );
+
         // #endregion;
       }
 
@@ -293,9 +308,9 @@
               0.99 97.73%,
               1 100%
             );
+
         // #endregion;
       }
     }
   }
 }
-//

@@ -21,6 +21,8 @@ const tagArray = [
   'footer',
   'h2',
   'p',
+  'input',
+  'label',
 ];
 
 /**

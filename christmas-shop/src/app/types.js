@@ -5,11 +5,15 @@
  */
 
 /**
- * @typedef {Extract<keyof HTMLElementTagNameMap, 'header' | 'div' | 'a' | 'img' | 'span' | 'nav' | 'ul' | 'li' | 'button' | 'main' | 'section' | 'h1' | 'footer' | 'h2' | 'p'>} TagType - The values of HTML tags (such as 'p', 'span', etc.)
+ * @typedef {Extract<keyof HTMLElementTagNameMap, 'header' | 'div' | 'a' | 'img' | 'span' | 'nav' | 'ul' | 'li' | 'button' | 'main' | 'section' | 'h1' | 'footer' | 'h2' | 'p' | 'input' | 'label'>} TagType - The values of HTML tags (such as 'p', 'span', etc.)
  */
 
 /**
  * @typedef {Object<string, Function>} PropsCallbacks
+ */
+
+/**
+ * @typedef {Object<string, *>} PropsCustomData
  */
 
 /**
@@ -26,14 +30,18 @@
  * @property {string} [src] - A path to the source file (for 'img' tag).
  * @property {string} [width] - The width of the image (for 'img' tag).
  * @property {string} [height] - The height of the image (for 'img' tag).
- * @property {string} [type] - The type of the button (for 'button' tag).
+ * @property {string} [type] - The type of the element (for 'button' or 'input' tags).
+ * @property {string} [name] - The name of the input.
+ * @property {string} [value] - The value of the input.
  * @property {PropsCallbacks} [callbacks] - An object containing callbacks to pass through components.
+ * @property {PropsCustomData} [customData] - Additional properties with any name and any value (optional).
  */
 
 /**
  * @typedef {{
  *   name: string,
  *   description: string,
+ *   category: 'For Work' | 'For Health' | 'For Harmony'
  *   superpowers: {
  *     live: string,
  *     create: string,
@@ -41,6 +49,7 @@
  *     dream: string
  *   }
  * }} Gift
+ */
 
 /**
  * An object structure to be consumed by router loader.
@@ -63,6 +72,7 @@
  * @property { 3 | 6 } sliderSteps
  * @property {'/' | '/gifts'} currentPage
  * @property {Gift[]} gifts
+ * @property {string} activeCategory
  */
 
 /**
