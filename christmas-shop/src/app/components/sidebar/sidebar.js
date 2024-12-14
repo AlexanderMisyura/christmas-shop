@@ -3,6 +3,9 @@ import tag from '../utilTags.js';
 
 import * as styles from './sidebar.module.scss';
 
+const TABLET_WIDTH = 768;
+const DESKTOP_BREAKPOINT = `(width > ${TABLET_WIDTH}px)`;
+
 /** @type {{href: string, name: string}[]} */
 const LINKS = [
   { href: './gifts', name: 'gifts' },
@@ -61,6 +64,8 @@ export default class Sidebar extends BaseComponent {
       this.updateSidebarActiveLink(this.state.stateObj);
       this.updateSidebarToggle(this.state.stateObj);
     }
+
+    this.listen();
   }
 
   /**
@@ -102,5 +107,20 @@ export default class Sidebar extends BaseComponent {
     }
 
     this.currentState.isSidebarOpen = stateObj.isSidebarOpen;
+  }
+
+  /**
+   * Adds listeners to close sidebar after a certain breakpoint.
+   * @returns {void}
+   */
+  listen() {
+    const desktopMediaQuery = window.matchMedia(DESKTOP_BREAKPOINT);
+    desktopMediaQuery.addEventListener('change', (e) => {
+      if (e.matches) {
+        this.updateState({
+          isSidebarOpen: false,
+        });
+      }
+    });
   }
 }

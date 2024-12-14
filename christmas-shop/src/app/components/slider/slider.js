@@ -13,6 +13,12 @@ const TRANSITION = '0.3s cubic-bezier(0.39, 0.58, 0.57, 1)';
 const LEFT = 'left';
 const RIGHT = 'right';
 
+const TABLET_WIDTH = 768;
+const DESKTOP_BREAKPOINT = `(width > ${TABLET_WIDTH}px)`;
+const STEPS_WIDE_SCREEN = 3;
+const TABLET_BREAKPOINT = `(width <= ${TABLET_WIDTH}px)`;
+const STEPS_NARROW_SCREEN = 6;
+
 /**
  * @type {{text: string, fileName: string, alt: string}[]}
  */
@@ -94,6 +100,14 @@ export default class Slider extends BaseComponent {
     }
 
     window.addEventListener('resize', this.handleResize.bind(this));
+
+    const initialSteps =
+      window.innerWidth > TABLET_WIDTH
+        ? STEPS_WIDE_SCREEN
+        : STEPS_NARROW_SCREEN;
+    this.updateState({ sliderSteps: initialSteps });
+
+    this.listen();
   }
 
   /**
@@ -275,7 +289,7 @@ export default class Slider extends BaseComponent {
   }
 
   /**
-   * Description
+   * Sets slider's steps number.
    * @param {StateObj} stateObj
    * @returns {void}
    */
@@ -283,6 +297,10 @@ export default class Slider extends BaseComponent {
     this.stepNumber = stateObj.sliderSteps;
   }
 
+  /**
+   * Holds slider's position while resizing the viewport.
+   * @returns {void}
+   */
   handleResize() {
     this.recalculate();
 
@@ -306,5 +324,27 @@ export default class Slider extends BaseComponent {
     }
 
     this.move(this.currentOffset);
+  }
+
+  /**
+   * Adds listeners to change slider steps.
+   * @returns {void}
+   */
+  listen() {
+    const desktopMediaQuery = window.matchMedia(DESKTOP_BREAKPOINT);
+    desktopMediaQuery.addEventListener('change', (e) => {
+      if (e.matches) {
+        this.updateState({
+          sliderSteps: STEPS_WIDE_SCREEN,
+        });
+      }
+    });
+
+    const tabletMediaQuery = window.matchMedia(TABLET_BREAKPOINT);
+    tabletMediaQuery.addEventListener('change', (e) => {
+      if (e.matches) {
+        this.updateState({ sliderSteps: STEPS_NARROW_SCREEN });
+      }
+    });
   }
 }
