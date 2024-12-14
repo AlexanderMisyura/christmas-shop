@@ -1,0 +1,41 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.cta {
+  &__wrapper {
+    background-color: $clr-primary;
+    background-image: url('../../assets/img/bg-forest.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border-bottom-right-radius: $border-rad-l;
+    border-bottom-left-radius: $border-rad-l;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: rem(60px) 0;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: rem(19px);
+    align-items: center;
+
+    padding: rem(60px) 0;
+
+    color: $clr-static-white;
+    text-align: center;
+  }
+
+  &__timer-block {
+    display: flex;
+    flex-direction: column;
+    gap: rem(9px);
+    align-items: center;
+
+    text-align: center;
+  }
+}

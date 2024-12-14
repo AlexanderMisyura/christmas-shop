@@ -1,0 +1,35 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.timer {
+  display: flex;
+  align-items: center;
+
+  padding: rem(8px) rem(12px) rem(12px);
+
+  background-color: $clr-static-white-40;
+  border-radius: $border-rad-l;
+
+  &__section {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: rem(80px);
+
+    &:not(:last-child)::after {
+      content: '';
+
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+
+      width: rem(1px);
+      height: rem(20px);
+
+      background-color: $clr-static-white-40;
+    }
+  }
+}

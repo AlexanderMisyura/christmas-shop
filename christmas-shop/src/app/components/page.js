@@ -9,6 +9,7 @@ import Slider from './slider/slider.js';
 import BestGifts from './bestGifts/bestGifts.js';
 import Gifts from './gifts/gifts.js';
 import Modal from './modal/modal.js';
+import Cta from './cta/cta.js';
 
 export default class Page extends BaseComponent {
   // #region components
@@ -58,10 +59,11 @@ export default class Page extends BaseComponent {
     this.slider = new Slider(state);
     this.gifts = new Gifts(state);
     this.bestGifts = new BestGifts(state);
+    this.cta = new Cta(props);
 
     this.homePage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
-      [this.hero, this.about, this.slider, this.bestGifts]
+      [this.hero, this.about, this.slider, this.bestGifts, this.cta]
     );
     this.giftsPage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
