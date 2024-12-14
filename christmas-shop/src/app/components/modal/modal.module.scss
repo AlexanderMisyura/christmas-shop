@@ -1,0 +1,110 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 0;
+
+  color: $clr-dark;
+
+  border: none;
+  border-radius: $border-rad-l;
+
+  &::backdrop {
+    background-color: $clr-backdrop;
+    transition: all 0.3s;
+  }
+
+  @starting-style {
+    &::backdrop {
+      background-color: transparent;
+    }
+  }
+
+  &__container {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+
+    width: min($modal-max-width, 100vw - rem(16px));
+
+    background-color: $clr-content-background;
+  }
+
+  &__btn {
+    position: absolute;
+    z-index: 1;
+    top: rem(12px);
+    right: rem(12px);
+
+    padding: 0;
+
+    outline: none;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $clr-primary;
+      }
+    }
+  }
+
+  &__image {
+    height: rem(230px);
+    object-fit: cover;
+
+    -webkit-user-drag: none;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20px);
+
+    padding: rem(20px);
+
+    background-color: $clr-static-white;
+    border-radius: $border-rad-l;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8px);
+  }
+
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8px);
+  }
+
+  &__rating {
+    display: flex;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+
+    &__line {
+      display: flex;
+      gap: rem(12px);
+      width: 100%;
+
+      & *:first-child {
+        flex-grow: 1;
+      }
+    }
+  }
+
+  &__icons {
+    display: flex;
+    gap: rem(8px);
+    align-items: center;
+  }
+
+  &__icon_low-score {
+    opacity: 0.1;
+  }
+}

@@ -67,12 +67,19 @@
  */
 
 /**
+ * @typedef {{x: number, y: number}} CardCenterCoords
+ */
+
+/**
  * @typedef {Object} StateObj
  * @property {Boolean} isSidebarOpen
+ * @property {Boolean} isModalOpen
  * @property { 3 | 6 } sliderSteps
  * @property {'/' | '/gifts'} currentPage
  * @property {Gift[]} gifts
+ * @property {Gift | null} giftModal
  * @property {string} activeCategory
+ * @property {CardCenterCoords} cardCenterCoords
  */
 
 /**

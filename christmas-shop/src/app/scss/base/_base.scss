@@ -116,6 +116,10 @@ body {
   overflow: hidden;
 }
 
+.modal-preserve-scroll-space {
+    scrollbar-gutter: stable;
+  }
+
 // -----ICONS-----
 
 .icon-small {
@@ -129,8 +133,8 @@ body {
 }
 
 .icon-large {
-  width: abstract_global.rem(80px);
-  height: abstract_global.rem(80px);
+  width: abstract_global.rem(40px);
+  height: abstract_global.rem(40px);
 }
 
 // -----OTHER-----

@@ -145,6 +145,6 @@ export default class Gifts extends BaseComponent {
         ? giftsArray
         : giftsArray.filter((gift) => gift.category === category);
 
-    return new Cards({ customData: { gifts: giftsFiltered } });
+    return new Cards({ customData: { gifts: giftsFiltered } }, this.state);
   }
 }

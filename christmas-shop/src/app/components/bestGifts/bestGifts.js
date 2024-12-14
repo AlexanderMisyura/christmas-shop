@@ -92,9 +92,12 @@ export default class BestGifts extends BaseComponent {
    * @returns {Cards}
    */
   generateCards() {
-    return new Cards({
-      classList: styles.bestGiftsCards,
-      customData: { gifts: shuffle(this.state.stateObj.gifts).slice(0, 4) },
-    });
+    return new Cards(
+      {
+        classList: styles.bestGiftsCards,
+        customData: { gifts: shuffle(this.state.stateObj.gifts).slice(0, 4) },
+      },
+      this.state
+    );
   }
 }

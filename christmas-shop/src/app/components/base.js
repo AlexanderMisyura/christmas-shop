@@ -122,8 +122,12 @@ export default class BaseComponent {
   addClasses(classes) {
     if (classes) {
       if (Array.isArray(classes)) {
-        this.element.classList.add(...classes);
-      } else {
+        classes.forEach((className) => {
+          if (className) {
+            this.element.classList.add(className);
+          }
+        });
+      } else if (classes) {
         this.element.classList.add(classes);
       }
     }

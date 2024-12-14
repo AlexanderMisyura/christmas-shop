@@ -26,34 +26,63 @@ const relatedData = {
 };
 
 export default class Card extends BaseComponent {
+  /** @type {Gift} */
+  card;
+
   /**
+   * @param {State} state
    * @param {Props} props
    */
-  constructor(props) {
-    super({ elementTagName: 'div', classList: styles.card });
+  constructor(props, state) {
+    super({ elementTagName: 'div', classList: styles.card }, [], state);
 
     if (props.customData) {
-      /** @type {Gift} */
-      const card = props.customData.gift;
+      this.card = props.customData.gift;
 
       const cardImg = tag.img({
         classList: styles.cardImg,
-        src: relatedData[card.category].imgSrc,
-        alt: relatedData[card.category].imgAlt,
+        src: relatedData[this.card.category].imgSrc,
+        alt: relatedData[this.card.category].imgAlt,
       });
 
       const cardFooter = tag.footer({ classList: styles.cardFooter }, [
         tag.div({
-          classList: ['heading-4', relatedData[card.category].captionClass],
-          text: card.category,
+          classList: [
+            'heading-4',
+            relatedData[this.card.category].captionClass,
+          ],
+          text: this.card.category,
         }),
         tag.div({
           classList: [styles.cardHeading, 'heading-3'],
-          text: card.name,
+          text: this.card.name,
         }),
       ]);
 
       this.appendChildElements([cardImg, cardFooter]);
+
+      this.addListener('click', this.handleClick.bind(this));
     }
+  }
+
+  /**
+   * Returns the card's center coordinates.
+   * @returns {CardCenterCoords}
+   */
+  getCenterCoords() {
+    const rect = this.element.getBoundingClientRect();
+    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+  }
+
+  /**
+   * Updates the state with card related data.
+   * @returns {void}
+   */
+  handleClick() {
+    this.updateState({
+      isModalOpen: true,
+      giftModal: this.card,
+      cardCenterCoords: this.getCenterCoords(),
+    });
   }
 }

@@ -3,10 +3,13 @@
 /** @type {StateObj} */
 const defaultState = {
   isSidebarOpen: false,
+  isModalOpen: false,
   sliderSteps: 3,
   currentPage: '/',
   gifts: [],
+  giftModal: null,
   activeCategory: 'All',
+  cardCenterCoords: { x: 0, y: 0 },
 };
 
 const CARDS_DATA_URL =

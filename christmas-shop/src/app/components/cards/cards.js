@@ -6,8 +6,9 @@ import * as styles from './cards.module.scss';
 export default class Cards extends BaseComponent {
   /**
    * @param {Props} props
+   * @param {State} state
    */
-  constructor(props) {
+  constructor(props, state) {
     super({ elementTagName: 'div', ...props });
 
     this.addClasses(styles.cards);
@@ -17,7 +18,7 @@ export default class Cards extends BaseComponent {
       const giftsArray = props.customData.gifts;
 
       this.appendChildElements(
-        giftsArray.map((gift) => new Card({ customData: { gift } }))
+        giftsArray.map((gift) => new Card({ customData: { gift } }, state))
       );
     }
   }

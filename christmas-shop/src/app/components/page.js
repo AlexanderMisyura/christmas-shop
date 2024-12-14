@@ -8,6 +8,7 @@ import About from './about/about.js';
 import Slider from './slider/slider.js';
 import BestGifts from './bestGifts/bestGifts.js';
 import Gifts from './gifts/gifts.js';
+import Modal from './modal/modal.js';
 
 const TABLET_WIDTH = 768;
 const DESKTOP_BREAKPOINT = `(width > ${TABLET_WIDTH}px)`;
@@ -57,6 +58,7 @@ export default class Page extends BaseComponent {
 
     this.header = new Header(props, state);
     this.sidebar = new Sidebar(props, state);
+    this.modal = new Modal(state);
     this.hero = new Hero(props);
     this.about = new About();
     this.slider = new Slider(state);
@@ -74,7 +76,12 @@ export default class Page extends BaseComponent {
 
     this.main = this.homePage.element;
 
-    this.appendChildElements([this.header, this.sidebar, this.homePage]);
+    this.appendChildElements([
+      this.header,
+      this.sidebar,
+      this.modal,
+      this.homePage,
+    ]);
 
     this.listen();
 
