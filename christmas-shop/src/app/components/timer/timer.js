@@ -44,21 +44,15 @@ export default class Timer extends BaseComponent {
     this.run();
   }
 
+  /**
+   * Updates the remaining time.
+   * @returns {void}
+   */
   updateTime() {
     const currentDate = new Date();
-    const currentUTCDate = new Date(
-      Date.UTC(
-        currentDate.getUTCFullYear(),
-        currentDate.getUTCMonth(),
-        currentDate.getUTCDate(),
-        currentDate.getUTCHours(),
-        currentDate.getUTCMinutes(),
-        currentDate.getUTCSeconds()
-      )
-    );
 
-    const newYearUTC = new Date(Date.UTC(currentUTCDate.getUTCFullYear() + 1));
-    const deltaUTC = newYearUTC - currentUTCDate;
+    const newYearUTC = new Date(Date.UTC(currentDate.getUTCFullYear() + 1));
+    const deltaUTC = newYearUTC.getTime() - currentDate.getTime();
 
     this.remaining = {
       days: Math.floor(deltaUTC / (1000 * 60 * 60 * 24)),
@@ -68,6 +62,10 @@ export default class Timer extends BaseComponent {
     };
   }
 
+  /**
+   * Updates DOM elements with corresponding time units.
+   * @returns {void}
+   */
   updateDOM() {
     this.days.setText(this.remaining.days.toString());
     this.hours.setText(this.remaining.hours.toString());
@@ -75,6 +73,10 @@ export default class Timer extends BaseComponent {
     this.seconds.setText(this.remaining.seconds.toString());
   }
 
+  /**
+   * Starts the timer.
+   * @returns {void}
+   */
   run() {
     setInterval(() => {
       this.updateTime();
