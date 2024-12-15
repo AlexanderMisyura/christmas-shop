@@ -120,6 +120,8 @@
     aspect-ratio: 1;
     width: abstract_global.rem(56px);
 
+    color: abstract_global.$clr-primary;
+
     background-color: abstract_global.$clr-static-white;
     border: 1px solid abstract_global.$clr-primary;
     border-radius: 100%;

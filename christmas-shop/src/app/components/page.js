@@ -11,6 +11,7 @@ import Gifts from './gifts/gifts.js';
 import Modal from './modal/modal.js';
 import Cta from './cta/cta.js';
 import Footer from './footer/footer.js';
+import ScrollTopButton from './scrollTopButton/scrollTopButton.js';
 
 export default class Page extends BaseComponent {
   // #region components
@@ -52,6 +53,9 @@ export default class Page extends BaseComponent {
 
   /** @type {Footer} */
   footer;
+
+  /** @type {ScrollTopButton} */
+  scrollTopButton;
   // #endregion
 
   /**
@@ -71,6 +75,7 @@ export default class Page extends BaseComponent {
     this.bestGifts = new BestGifts(state);
     this.cta = new Cta(props);
     this.footer = new Footer();
+    this.scrollTopButton = new ScrollTopButton();
 
     this.homePage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
@@ -78,7 +83,7 @@ export default class Page extends BaseComponent {
     );
     this.giftsPage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
-      [this.gifts]
+      [this.gifts, this.scrollTopButton]
     );
 
     this.main = this.homePage.element;
