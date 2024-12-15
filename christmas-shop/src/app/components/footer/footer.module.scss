@@ -1,0 +1,50 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.footer {
+  &__container {
+    flex-direction: column;
+    gap: rem(60px);
+  }
+
+  &__contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: rem(12px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__copy {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12px);
+    align-items: center;
+  }
+
+  &__social {
+    display: flex;
+    gap: rem(12px);
+  }
+
+  &__social-icon {
+    display: flex;
+    padding: rem(8px);
+    transition: $transition;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $clr-primary;
+      }
+    }
+  }
+
+  &__link {
+    transition: $transition;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $clr-primary;
+      }
+    }
+  }
+}

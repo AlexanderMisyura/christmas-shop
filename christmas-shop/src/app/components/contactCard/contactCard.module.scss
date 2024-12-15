@@ -1,0 +1,36 @@
+@use '../../scss/abstract/abstract_global' as *;
+
+.contact-card {
+  display: flex;
+  flex: 1 0 rem(371px);
+  justify-content: center;
+
+  padding: rem(20px);
+
+  background-color: $clr-content-background;
+  border-radius: $border-rad-l;
+
+  transition: $transition;
+
+  & * {
+    transition: $transition;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    gap: rem(12px);
+    align-items: center;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      cursor: pointer;
+
+      .contact-card__action,
+      .contact-card__heading {
+        color: $clr-primary;
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import BestGifts from './bestGifts/bestGifts.js';
 import Gifts from './gifts/gifts.js';
 import Modal from './modal/modal.js';
 import Cta from './cta/cta.js';
+import Footer from './footer/footer.js';
 
 export default class Page extends BaseComponent {
   // #region components
@@ -42,6 +43,15 @@ export default class Page extends BaseComponent {
 
   /** @type {Gifts} */
   gifts;
+
+  /** @type {Modal} */
+  modal;
+
+  /** @type {Cta} */
+  cta;
+
+  /** @type {Footer} */
+  footer;
   // #endregion
 
   /**
@@ -60,6 +70,7 @@ export default class Page extends BaseComponent {
     this.gifts = new Gifts(state);
     this.bestGifts = new BestGifts(state);
     this.cta = new Cta(props);
+    this.footer = new Footer();
 
     this.homePage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
@@ -77,6 +88,7 @@ export default class Page extends BaseComponent {
       this.sidebar,
       this.modal,
       this.homePage,
+      this.footer,
     ]);
 
     if (this.state) {
