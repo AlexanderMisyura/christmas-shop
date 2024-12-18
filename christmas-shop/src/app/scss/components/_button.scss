@@ -1,4 +1,4 @@
-@use '../abstract/abstract_global';
+@use '../abstract/abstract_global' as *;
 
 %base-btn {
   display: flex;
@@ -6,9 +6,9 @@
   justify-content: center;
 
   background-color: transparent;
-  border-radius: abstract_global.$border-rad-s;
+  border-radius: $border-rad-s;
 
-  transition: abstract_global.$transition;
+  transition: $transition;
 
   @media (hover: hover) and (pointer: fine) {
     &:hover {
@@ -20,20 +20,20 @@
 .btn {
   @extend %base-btn;
 
-  padding: abstract_global.rem(12px) abstract_global.rem(20px);
+  padding: rem(12px) rem(20px);
 
   &_large {
     @extend %base-btn;
 
-    padding: abstract_global.rem(20px) abstract_global.rem(32px);
-    color: abstract_global.$clr-static-white;
-    background-color: abstract_global.$clr-dark;
-    border-radius: abstract_global.$border-rad-l;
+    padding: rem(20px) rem(32px);
+    color: $clr-static-white;
+    background-color: $clr-dark;
+    border-radius: $border-rad-l;
 
     @media (hover: hover) and (pointer: fine) {
       &:hover {
-        color: abstract_global.$clr-dark;
-        background-color: abstract_global.$clr-static-white;
+        color: $clr-dark;
+        background-color: $clr-static-white;
       }
     }
   }
@@ -42,9 +42,9 @@
     @extend %base-btn;
 
     aspect-ratio: 1;
-    width: abstract_global.rem(56px);
-    border: 1px solid abstract_global.$clr-static-white;
-    border-radius: abstract_global.$border-rad-l;
+    width: rem(56px);
+    border: 1px solid $clr-static-white;
+    border-radius: $border-rad-l;
   }
 
   &_burger {
@@ -54,8 +54,8 @@
 
     &__burger {
       position: relative;
-      width: abstract_global.rem(40px);
-      height: abstract_global.rem(40px);
+      width: rem(40px);
+      height: rem(40px);
 
       &::before,
       &::after {
@@ -63,10 +63,10 @@
 
         position: absolute;
 
-        width: abstract_global.rem(20px);
-        height: abstract_global.rem(1px);
+        width: rem(20px);
+        height: rem(1px);
 
-        background-color: abstract_global.$clr-dark;
+        background-color: $clr-dark;
 
         transition:
           transform 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28),
@@ -103,7 +103,7 @@
     @media (hover: hover) and (pointer: fine) {
       &:hover .btn_burger__burger::before,
       &:hover .btn_burger__burger::after {
-        background-color: abstract_global.$clr-primary;
+        background-color: $clr-primary;
       }
     }
   }
@@ -112,18 +112,18 @@
     @extend %base-btn;
 
     position: fixed;
-    right: abstract_global.rem(8px);
-    bottom: abstract_global.rem(8px);
+    right: rem(8px);
+    bottom: rem(8px);
 
     display: none;
 
     aspect-ratio: 1;
-    width: abstract_global.rem(56px);
+    width: rem(56px);
 
-    color: abstract_global.$clr-primary;
+    color: $clr-primary;
 
-    background-color: abstract_global.$clr-static-white;
-    border: 1px solid abstract_global.$clr-primary;
+    background-color: $clr-static-white;
+    border: 1px solid $clr-primary;
     border-radius: 100%;
 
     @media (hover: hover) and (pointer: fine) {
@@ -134,7 +134,7 @@
       }
     }
 
-    @media (max-width: abstract_global.$tablet-breakpoint) {
+    @media (max-width: $tablet-breakpoint) {
       &_shown {
         display: flex;
         animation:
@@ -314,5 +314,68 @@
         // #endregion;
       }
     }
+  }
+}
+
+
+@keyframes drop-btn_up-in {
+  0% {
+    right: rem(-56px);
+    bottom: calc(100dvh / 10);
+    display: none;
+  }
+
+  100% {
+    right: rem(8px);
+    bottom: rem(8px);
+    display: flex;
+  }
+}
+
+@keyframes drop-btn_up-out {
+  0% {
+    right: rem(8px);
+    bottom: rem(8px);
+    display: flex;
+  }
+
+  100% {
+    right: rem(-56px);
+    bottom: calc(100dvh / 10);
+    display: none;
+  }
+}
+
+@keyframes scale-btn_up-in {
+  0% {
+    scale: 0;
+    opacity: 0;
+  }
+
+  100% {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+@keyframes scale-btn_up-out {
+  0% {
+    scale: 1;
+    opacity: 1;
+  }
+
+  100% {
+    scale: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes scale-arrow {
+  0% {
+    scale: 1.1;
+  }
+
+  100% {
+    scale: 1.5;
   }
 }
