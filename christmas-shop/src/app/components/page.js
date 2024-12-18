@@ -12,6 +12,7 @@ import Modal from './modal/modal.js';
 import Cta from './cta/cta.js';
 import Footer from './footer/footer.js';
 import ScrollTopButton from './scrollTopButton/scrollTopButton.js';
+import Preloader from './preloader/preloader.js';
 
 export default class Page extends BaseComponent {
   // #region components
@@ -56,6 +57,9 @@ export default class Page extends BaseComponent {
 
   /** @type {ScrollTopButton} */
   scrollTopButton;
+
+  /** @type {Preloader} */
+  preloader;
   // #endregion
 
   /**
@@ -76,6 +80,7 @@ export default class Page extends BaseComponent {
     this.cta = new Cta(props);
     this.footer = new Footer();
     this.scrollTopButton = new ScrollTopButton();
+    this.preloader = new Preloader({ customData: { page: this } }, state);
 
     this.homePage = new BaseComponent(
       { elementTagName: 'main', classList: 'main' },
@@ -89,6 +94,7 @@ export default class Page extends BaseComponent {
     this.main = this.homePage.element;
 
     this.appendChildElements([
+      this.preloader,
       this.header,
       this.sidebar,
       this.modal,

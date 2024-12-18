@@ -72,6 +72,7 @@
 
 /**
  * @typedef {Object} StateObj
+ * @property {Boolean} isLoading
  * @property {Boolean} isSidebarOpen
  * @property {Boolean} isModalOpen
  * @property { 3 | 6 } sliderSteps

@@ -2,6 +2,7 @@
 
 /** @type {StateObj} */
 const defaultState = {
+  isLoading: true,
   isSidebarOpen: false,
   isModalOpen: false,
   sliderSteps: 3,
@@ -89,6 +90,6 @@ export default class State {
     const result = await fetch(url);
     const cardsArray = await result.json();
 
-    this.updateState({ gifts: cardsArray });
+    this.updateState({ gifts: cardsArray, isLoading: false });
   }
 }
