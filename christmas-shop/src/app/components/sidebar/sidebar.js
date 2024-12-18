@@ -8,7 +8,7 @@ const DESKTOP_BREAKPOINT = `(width > ${TABLET_WIDTH}px)`;
 
 /** @type {{href: string, name: string}[]} */
 const LINKS = [
-  { href: './gifts', name: 'gifts' },
+  { href: './gifts/', name: 'gifts' },
   { href: './#about', name: 'about' },
   { href: './#best', name: 'best' },
   { href: './#contacts', name: 'contacts' },
@@ -58,10 +58,10 @@ export default class Sidebar extends BaseComponent {
       };
 
       this.subscribe(this.state, [
-        this.updateSidebarActiveLink.bind(this),
+        this.updateSidebarLinks.bind(this),
         this.updateSidebarToggle.bind(this),
       ]);
-      this.updateSidebarActiveLink(this.state.stateObj);
+      this.updateSidebarLinks(this.state.stateObj);
       this.updateSidebarToggle(this.state.stateObj);
     }
 
@@ -69,19 +69,28 @@ export default class Sidebar extends BaseComponent {
   }
 
   /**
-   * A method to be called by publisher: updates styles of active link.
+   * A method to be called by publisher.
+   * Updates styles of active link and links' href.
    * @param {StateObj} stateObj
    * @returns {void}
    */
-  updateSidebarActiveLink(stateObj) {
+  updateSidebarLinks(stateObj) {
     if (this.currentState.currentPage === stateObj.currentPage) return;
 
     const giftsLink = this.linkElements.gifts;
+    const aboutLink = this.linkElements.about;
+    const bestLink = this.linkElements.best;
 
-    if (stateObj.currentPage === '/gifts') {
+    if (stateObj.currentPage === '/gifts/') {
       giftsLink.addClasses(styles.sidebarLinkActive);
+      giftsLink.setAttributes('href', '../gifts/');
+      aboutLink.setAttributes('href', '../#about');
+      bestLink.setAttributes('href', '../#best');
     } else if (stateObj.currentPage === '/') {
       giftsLink.removeClasses(styles.sidebarLinkActive);
+      aboutLink.setAttributes('href', './gifts/');
+      aboutLink.setAttributes('href', './#about');
+      bestLink.setAttributes('href', './#best');
     }
 
     this.currentState.currentPage = stateObj.currentPage;

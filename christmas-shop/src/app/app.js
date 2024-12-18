@@ -2,7 +2,7 @@ import State from './state.js';
 import Router from './router.js';
 import Page from './components/page.js';
 
-const ROUTES = [{ pathname: '/' }, { pathname: '/gifts' }];
+const ROUTES = [{ pathname: '/' }, { pathname: '/gifts/' }];
 
 export default class App {
   /** @type {State} */

@@ -75,7 +75,7 @@
  * @property {Boolean} isSidebarOpen
  * @property {Boolean} isModalOpen
  * @property { 3 | 6 } sliderSteps
- * @property {'/' | '/gifts'} currentPage
+ * @property {'/' | '/gifts/'} currentPage
  * @property {Gift[]} gifts
  * @property {Gift | null} giftModal
  * @property {string} activeCategory

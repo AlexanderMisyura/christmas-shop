@@ -115,7 +115,7 @@ export default class Page extends BaseComponent {
         this.replaceCurrentPage(this.homePage.element);
         break;
 
-      case '/gifts':
+      case '/gifts/':
         this.replaceCurrentPage(this.giftsPage.element);
         break;
 

@@ -2,40 +2,73 @@ export default class Router {
   /** @type {RouteObj[]} */
   routeObj;
 
-  /** @param {RouteObj[]} routeObj */
-  constructor(routeObj) {
-    this.routeObj = routeObj;
+  /** @param {RouteObj[]} routeObjects */
+  constructor(routeObjects) {
+    this.routeObjects = routeObjects;
     this.initialLoad();
 
     window.addEventListener('popstate', () => this.initialLoad());
   }
 
   initialLoad() {
-    const currentHref = this.getCurrentHref();
-    this.load(currentHref);
+    const currentPathname = this.getCurrentPathname();
+    const currentHash = this.getCurrentHash();
+    this.load(currentPathname, currentHash);
   }
 
   /**
    * Navigates to the specified pathname.
    * @param {string} pathname
+   * @param {string} hash
    * @returns {void}
    */
-  load(pathname) {
+  load(pathname, hash) {
     const routeObj = this.getCurrentRouteObj(pathname);
 
     if (!routeObj) {
       this.navigate('/');
     } else {
       routeObj.callback();
+      this.scrollToHashElement(hash);
     }
   }
 
   /**
-   * Returns current URL string.
+   * Returns current URL full href string.
    * @returns {string}
    */
   getCurrentHref() {
     return window.location.href;
+  }
+
+  /**
+   * Returns current URL pathname string.
+   * @returns {string}
+   */
+  getCurrentPathname() {
+    return window.location.pathname;
+  }
+
+  /**
+   * Returns current URL hash string.
+   * @returns {string}
+   */
+  getCurrentHash() {
+    return window.location.hash;
+  }
+
+  /**
+   * Scrolls the page to the element which id matches the url hash if any.
+   * @param {string} hash
+   * @returns {void}
+   */
+  scrollToHashElement(hash) {
+    if (hash) {
+      setTimeout(() => {
+        const target = document.querySelector(hash);
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      }, 0);
+    }
   }
 
   /**
@@ -44,12 +77,12 @@ export default class Router {
    * @returns {RouteObj | null}
    */
   getCurrentRouteObj(pathname) {
-    const currentRouteObj = this.routeObj.find(
+    const currentRouteObj = this.routeObjects.find(
       (route) => route.pathname === pathname
     );
-    if (currentRouteObj) return currentRouteObj;
+    if (!currentRouteObj) return null;
 
-    return null;
+    return currentRouteObj;
   }
 
   /**
@@ -59,9 +92,9 @@ export default class Router {
    */
   navigate(href) {
     const url = new URL(href, window.location.origin);
-    window.history.pushState({}, '', url.pathname);
+    window.history.pushState({}, '', url);
 
-    this.load(url.pathname);
+    this.load(url.pathname, url.hash);
   }
 
   /**
@@ -71,14 +104,16 @@ export default class Router {
    */
   handleLink = (e) => {
     e.preventDefault();
-    const { target } = e;
-    if (target instanceof HTMLElement) {
-      const link = target.closest('a');
-      if (link instanceof HTMLAnchorElement) {
-        const currentHref = this.getCurrentHref();
-        if (currentHref !== link.href) {
-          this.navigate(link.href);
-        }
+    const { currentTarget } = e;
+    if (currentTarget instanceof HTMLAnchorElement) {
+      const currentHref = this.getCurrentHref();
+      const url = new URL(currentTarget.href);
+      const linkHash = url.hash;
+
+      if (currentHref === currentTarget.href && linkHash) {
+        this.scrollToHashElement(linkHash);
+      } else if (currentHref !== currentTarget.href) {
+        this.navigate(currentTarget.href);
       }
     }
   };

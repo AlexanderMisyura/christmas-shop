@@ -5,7 +5,7 @@ import * as styles from './nav.module.scss';
 
 /** @type {{href: string, name: string}[]} */
 const LINKS = [
-  { href: './gifts', name: 'gifts' },
+  { href: './gifts/', name: 'gifts' },
   { href: './#about', name: 'about' },
   { href: './#best', name: 'best' },
   { href: './#contacts', name: 'contacts' },
@@ -63,10 +63,10 @@ export default class Nav extends BaseComponent {
 
     if (this.state) {
       this.subscribe(this.state, [
-        this.updateNavActiveLink.bind(this),
+        this.updateNavLinks.bind(this),
         this.updateBurgerBtnToggle.bind(this),
       ]);
-      this.updateNavActiveLink(this.state.stateObj);
+      this.updateNavLinks(this.state.stateObj);
     }
   }
 
@@ -86,18 +86,26 @@ export default class Nav extends BaseComponent {
 
   /**
    * A method to be called by publisher.
-   * Updates styles of the active link.
+   * Updates styles of the active link and links' href.
    * @param {StateObj} stateObj
    * @returns {void}
    */
-  updateNavActiveLink(stateObj) {
+  updateNavLinks(stateObj) {
     const { currentPage } = stateObj;
     const giftsLink = this.linkElements.gifts;
+    const aboutLink = this.linkElements.about;
+    const bestLink = this.linkElements.best;
 
-    if (currentPage === '/gifts') {
+    if (currentPage === '/gifts/') {
       giftsLink.addClasses(styles.navLinkActive);
+      giftsLink.setAttributes('href', '../gifts/');
+      aboutLink.setAttributes('href', '../#about');
+      bestLink.setAttributes('href', '../#best');
     } else if (currentPage === '/') {
       giftsLink.removeClasses(styles.navLinkActive);
+      giftsLink.setAttributes('href', './gifts/');
+      aboutLink.setAttributes('href', './#about');
+      bestLink.setAttributes('href', './#best');
     }
   }
 }

@@ -18,7 +18,7 @@ export default class Cta extends BaseComponent {
     this.appendSingleChild(wrapper);
 
     const link = tag.a({
-      href: './gifts',
+      href: './gifts/',
       classList: ['btn_large', 'action-small'],
       text: 'explore magical gifts',
     });
