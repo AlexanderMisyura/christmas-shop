@@ -13,7 +13,12 @@ export default class ScrollTopButton extends BaseComponent {
     const arrowImg = svgChunkTemplate(arrowUp, 'icon-medium');
     this.element.insertAdjacentHTML('afterbegin', arrowImg);
 
-    this.addListener('click', () => window.scrollTo(0, 0));
+    this.addListener('click', () =>
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      })
+    );
 
     window.addEventListener('scroll', this.handleScroll.bind(this));
   }
