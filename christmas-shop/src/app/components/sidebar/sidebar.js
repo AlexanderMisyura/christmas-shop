@@ -88,7 +88,7 @@ export default class Sidebar extends BaseComponent {
       bestLink.setAttributes('href', '../#best');
     } else if (stateObj.currentPage === '/') {
       giftsLink.removeClasses(styles.sidebarLinkActive);
-      aboutLink.setAttributes('href', './gifts/');
+      giftsLink.setAttributes('href', './gifts/');
       aboutLink.setAttributes('href', './#about');
       bestLink.setAttributes('href', './#best');
     }
