@@ -46,7 +46,9 @@ export default class Router {
    * @returns {string}
    */
   getCurrentPathname() {
-    return window.location.pathname;
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    return window.location.pathname.replace(BASE_PATH, '/');
   }
 
   /**
@@ -91,10 +93,18 @@ export default class Router {
    * @returns {void}
    */
   navigate(href) {
-    const url = new URL(href, window.location.origin);
+    const url = new URL(href);
     window.history.pushState({}, '', url);
 
-    this.load(url.pathname, url.hash);
+    // @ts-ignore
+    // eslint-disable-next-line no-undef
+    const pathname = BASE_PATH
+      ? // @ts-ignore
+        // eslint-disable-next-line no-undef
+        url.pathname.replace(BASE_PATH, '/')
+      : url.pathname;
+
+    this.load(pathname, url.hash);
   }
 
   /**

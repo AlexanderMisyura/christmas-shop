@@ -4,13 +4,12 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
 import pkg from 'webpack';
 
-const { ProgressPlugin } = pkg;
+const { ProgressPlugin, DefinePlugin } = pkg;
+
+const BASE_PATH = '/alexandermisyura-JSFE2024Q4/christmas-shop/';
 
 const devPlugins = (isDev) =>
   isDev ? [new ProgressPlugin()] : [new ESLintPlugin({ extensions: ['js'] })];
-
-// const esLintPlugin = (isDevelopment) =>
-//   isDevelopment ? [] : [new ESLintPlugin({ extensions: ['js'] })];
 
 export default ({ development }) => ({
   mode: development ? 'development' : 'production',
@@ -97,6 +96,9 @@ export default ({ development }) => ({
       favicon: path.resolve(process.cwd(), 'src/app/assets/icons/favicon.ico'),
     }),
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
+    new DefinePlugin({
+      BASE_PATH: JSON.stringify(development ? '/' : BASE_PATH),
+    }),
     ...devPlugins(development),
   ],
 });
