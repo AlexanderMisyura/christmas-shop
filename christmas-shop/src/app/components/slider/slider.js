@@ -52,6 +52,20 @@ const sliderContent = [
  * @property {EventListenerOrEventListenerObject} handler
  */
 
+/**
+ * Limits function calls.
+ * @param {Function} func - The function to limit its calls.
+ * @param {number} timeout - Delay during which the previous function call will be canceled.
+ * @returns {Function} - A debounced wrapper with function.
+ */
+function debounce(func, timeout) {
+  let timeoutId;
+  return function wrapperDebounced(...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => func.apply(this, args), timeout);
+  };
+}
+
 export default class Slider extends BaseComponent {
   // #region properties
   /** @type {BaseComponent} */
@@ -99,7 +113,12 @@ export default class Slider extends BaseComponent {
       this.subscribe(this.state, this.updateStepNumber.bind(this));
     }
 
-    window.addEventListener('resize', this.handleResize.bind(this));
+    window.addEventListener(
+      'resize',
+      /** @type {EventListenerOrEventListenerObject} */ (
+        debounce(this.handleResize.bind(this), 50)
+      )
+    );
 
     const initialSteps =
       window.innerWidth > TABLET_WIDTH
