@@ -2,6 +2,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import ESLintPlugin from 'eslint-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 import pkg from 'webpack';
 
 const { ProgressPlugin, DefinePlugin } = pkg;
@@ -98,6 +99,13 @@ export default ({ development }) => ({
     new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
     new DefinePlugin({
       BASE_PATH: JSON.stringify(development ? '/' : BASE_PATH),
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(process.cwd(), 'src/gifts.json'),
+        },
+      ],
     }),
     ...devPlugins(development),
   ],

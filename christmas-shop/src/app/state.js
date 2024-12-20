@@ -13,9 +13,6 @@ const defaultState = {
   cardCenterCoords: { x: 0, y: 0 },
 };
 
-const CARDS_DATA_URL =
-  'https://raw.githubusercontent.com/rolling-scopes-school/tasks/refs/heads/master/tasks/christmas-shop/gifts.json';
-
 export default class State {
   /** @type {StateObj} */
   stateObj;
@@ -30,7 +27,7 @@ export default class State {
     this.stateObj = defaultState;
     this.subscribers = [];
 
-    this.getCards(CARDS_DATA_URL);
+    this.getCards('./gifts.json');
   }
 
   /**
