@@ -25,9 +25,11 @@
   }
 }
 
-.loading {
+body:has(.loading) {
   overflow: hidden;
+}
 
+.loading {
   & > *:not(.preloader) {
     opacity: 0;
   }
