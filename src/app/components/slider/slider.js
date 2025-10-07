@@ -115,7 +115,7 @@ export default class Slider extends BaseComponent {
     this.currentWidth = this.slider.element.clientWidth;
     this.maxOffset = this.maxWidth - this.currentWidth;
     this.currentOffset = START_POSITION;
-    this.stepNumber = this.state.stateObj.sliderSteps;
+    this.stepNumber = this.state?.stateObj.sliderSteps ?? STEPS_WIDE_SCREEN;
     this.stepWidth = Math.ceil(this.maxOffset / this.stepNumber);
 
     if (this.state) {
@@ -153,6 +153,8 @@ export default class Slider extends BaseComponent {
 
     const controls = this.createControlBlock();
 
+    const nextYear = new Date().getFullYear() + 1;
+
     const container = tag.div(
       {
         classList: [
@@ -164,7 +166,7 @@ export default class Slider extends BaseComponent {
       [
         tag.div({ classList: styles.sliderText }, [
           tag.div({ classList: 'caption', text: 'Become Happier!' }),
-          tag.h2({ classList: 'heading-2', text: 'in the new 2025' }),
+          tag.h2({ classList: 'heading-2', text: `in the new ${nextYear}` }),
         ]),
         tag.div({ classList: styles.sliderRow }, [
           slider,
