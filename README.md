@@ -26,7 +26,7 @@ A fully responsive single page application with client-side routing, interactive
 
 ### Local Setup
 
-- Make a fork of the [repository](https://github.com/AlexanderMisyura/eCommerce).
+- Make a fork of the [repository](https://github.com/AlexanderMisyura/christmas-shop).
 - Clone the forked repository to your local machine.
 - Navigate to the project directory: `cd christmas-shop`.
 - Install dependencies with `npm install`.
