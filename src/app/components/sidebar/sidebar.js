@@ -17,7 +17,7 @@ const LINKS = [
   { href: '/gifts', name: 'gifts' },
   { href: '/#about', name: 'about' },
   { href: '/#best', name: 'best' },
-  { href: '/#contacts', name: 'contacts' },
+  { href: '#contacts', name: 'contacts' },
 ];
 
 export default class Sidebar extends BaseComponent {

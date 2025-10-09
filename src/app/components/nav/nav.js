@@ -14,7 +14,7 @@ const LINKS = [
   { href: '/gifts', name: 'gifts' },
   { href: '/#about', name: 'about' },
   { href: '/#best', name: 'best' },
-  { href: '/#contacts', name: 'contacts' },
+  { href: '#contacts', name: 'contacts' },
 ];
 export default class Nav extends BaseComponent {
   /** @type {Object.<string, BaseComponent>} */
@@ -85,11 +85,4 @@ export default class Nav extends BaseComponent {
       this.btnBurger.removeClasses('btn_burger_active');
     }
   }
-
-  /**
-   * A method to be called by publisher.
-   * Updates styles of the active link and links' href.
-   * @param {StateObj} stateObj
-   * @returns {void}
-   */
 }
