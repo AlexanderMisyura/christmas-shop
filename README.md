@@ -31,7 +31,7 @@ A fully responsive single page application with client-side routing, interactive
 - Navigate to the project directory: `cd christmas-shop`.
 - Install dependencies with `npm install`.
 - Start the dev server with `npm run dev`.
-- Open your browser and navigate to `http://localhost:5173`.
+- Open your browser and navigate to `http://localhost:8080`.
 
 ## Contributing
 
